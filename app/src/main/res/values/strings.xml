@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">viewer-2020</string>
+    <string name="stitch_client_app_id">viewer-hngek</string>
 </resources>
