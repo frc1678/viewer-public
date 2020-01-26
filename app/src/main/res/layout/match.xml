@@ -55,35 +55,36 @@
         android:layout_below="@+id/matchNumber"
         android:layout_toRightOf="@+id/matchNumber"
         android:layout_toLeftOf="@+id/redScore">
+
         <TextView
             android:id="@+id/teamFour"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="#0000ff"
             android:layout_toRightOf="@+id/matchNumber"
-            android:text="1678"
+            android:layout_weight="1"
             android:gravity="center"
-            android:layout_weight="1"/>
+            android:text="1678"
+            android:textColor="#0000ff" />
 
         <TextView
             android:id="@+id/teamFive"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textColor="#0000ff"
+            android:layout_width="83dp"
+            android:layout_height="match_parent"
             android:layout_toRightOf="@+id/matchNumber"
-            android:text="1678"
+            android:layout_weight="1"
             android:gravity="center"
-            android:layout_weight="1"/>
+            android:text="1678"
+            android:textColor="#0000ff" />
 
         <TextView
             android:id="@+id/teamSix"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="#0000ff"
             android:layout_toRightOf="@+id/matchNumber"
-            android:text="1678"
+            android:layout_weight="1"
             android:gravity="center"
-            android:layout_weight="1"/>
+            android:text="1678"
+            android:textColor="#0000ff" />
     </LinearLayout>
 
     <View
@@ -197,7 +198,5 @@
         android:layout_height="2dp"
         android:layout_below="@id/redScore"
         android:layout_marginTop="55dp"/>
-
-
 
 </RelativeLayout>

@@ -1,5 +1,7 @@
 package com.example.viewer_2020
 
+import android.app.ActivityOptions
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.annotation.NonNull
@@ -15,12 +17,14 @@ import com.mongodb.stitch.core.auth.providers.anonymous.AnonymousCredential
 import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.view.View
 import com.mongodb.BasicDBObject
 import com.mongodb.DBObject
 import com.mongodb.client.model.Filters.eq
 import org.bson.BsonDocument
 import org.bson.Document
 import org.bson.conversions.Bson
+import kotlinx.android.synthetic.main.match_schedule.*
 
 
 class MatchScheduleActivity : AppCompatActivity() {
@@ -40,10 +44,14 @@ class MatchScheduleActivity : AppCompatActivity() {
                 val competitionDocument = collection.findOne(eq("tba_event_key", tbaEventKey))
                 competitionDocument.addOnSuccessListener {
                     val result = competitionDocument.getResult()
-                    Log.i("RESULT", result.toString())
+                    Log.e("RESULT", result.toString())
                 }
                 return null
             }
+        })
+        next.setOnClickListener(View.OnClickListener {
+            val intent = Intent(this, MatchDetailsActivity::class.java)
+            startActivity(intent)
         })
     }
 }
