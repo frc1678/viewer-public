@@ -4,4 +4,6 @@
     <string name="team_number_match_details">1678</string>
     <string name="match_number_match_details">Q21</string>
     <string name="data_points_texts_match_details">EXAMPLE</string>
+    <string name="title_ranking">Rankings</string>
+    <string name="title_match_schedule">Match Schedule</string>
 </resources>

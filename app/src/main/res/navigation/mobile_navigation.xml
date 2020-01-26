@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_ranking">
+
+    <fragment
+        android:id="@+id/navigation_match_schedule"
+        android:name="com.example.viewer_2020.MatchScheduleFragment"
+        android:label="@string/title_match_schedule"
+        tools:layout="@layout/fragment_match_schedule" />
+
+    <fragment
+        android:id="@+id/navigation_ranking"
+        android:name="com.example.viewer_2020.RankingFragment"
+        android:label="@string/title_ranking"
+        tools:layout="@layout/fragment_ranking" />
+</navigation>
