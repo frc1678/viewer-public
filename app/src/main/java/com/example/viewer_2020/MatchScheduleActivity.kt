@@ -1,57 +1,39 @@
+/*
+* MatchScheduleActivity.kt
+* viewer
+*
+* Created on 1/26/2020
+* Copyright 2020 Citrus Circuits. All rights reserved.
+*/
+
 package com.example.viewer_2020
 
-import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.tasks.Continuation
-import com.google.android.gms.tasks.Task
-import com.mongodb.stitch.android.core.Stitch
-import com.mongodb.stitch.android.core.StitchAppClient
-import com.mongodb.stitch.android.core.auth.StitchUser
-import com.mongodb.stitch.android.services.mongodb.remote.RemoteMongoClient
-import com.mongodb.stitch.android.services.mongodb.remote.RemoteMongoCollection
-import com.mongodb.stitch.core.auth.providers.anonymous.AnonymousCredential
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import android.view.View
-import com.mongodb.BasicDBObject
-import com.mongodb.DBObject
-import com.mongodb.client.model.Filters.eq
-import org.bson.BsonDocument
-import org.bson.Document
-import org.bson.conversions.Bson
 import kotlinx.android.synthetic.main.match_schedule.*
 
-
+//Displays the match schedule of the given event.
+//A huge list of every match where each cell includes all the match's teams and the match's predicted score.
 class MatchScheduleActivity : AppCompatActivity() {
-    var stitchClient: StitchAppClient = Stitch.getDefaultAppClient()
-    var mongoClient: RemoteMongoClient = stitchClient.getServiceClient(RemoteMongoClient.factory, "mongodb-atlas")
-    var collection = mongoClient.getDatabase("scouting_system_cloud").getCollection("competitions")
+
+    //Creates the on click listeners for each XML element with an onClick implementation.
+    private fun initializeClickListeners() {
+        next.setOnLongClickListener {
+            startNextActivity()
+            return@setOnLongClickListener true
+        }
+    }
+
+    //Function whose purpose is to begin the given activity when called.
+    private fun startNextActivity() {
+        startActivity(Intent(this, MatchDetailsActivity::class.java))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.match_schedule)
 
-        stitchClient.getAuth().loginWithCredential(AnonymousCredential()
-        ).continueWithTask(object:Continuation<StitchUser, Task<Void>> {
-            @Throws(Exception::class)
-            override fun then(@NonNull task: Task<StitchUser>): Task<Void>? {
-                val tbaEventKey = "2019cafr"
-                val competitionDocument = collection.findOne(eq("tba_event_key", tbaEventKey))
-                competitionDocument.addOnSuccessListener {
-                    val result = competitionDocument.getResult()
-                    Log.e("RESULT", result.toString())
-                }
-                return null
-            }
-        })
-        next.setOnClickListener(View.OnClickListener {
-            val intent = Intent(this, MatchDetailsActivity::class.java)
-            startActivity(intent)
-        })
+        initializeClickListeners()
     }
 }
