@@ -8,8 +8,11 @@
 
 package com.example.viewer_2020
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -27,9 +30,28 @@ class MainViewerActivity : AppCompatActivity() {
         nav_view.setupWithNavController(findNavController(host))
     }
 
+    //Requests storage permissions if they are not already given.
+    private fun verifyStoragePermissions() {
+        val permission =
+            ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            )
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                ),
+                1
+            )
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        verifyStoragePermissions()
         setupNavigationController(R.id.nav_host_fragment)
     }
 }

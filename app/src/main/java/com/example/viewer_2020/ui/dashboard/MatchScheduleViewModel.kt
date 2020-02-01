@@ -8,15 +8,14 @@
 
 package com.example.viewer_2020
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 //Fragment view handler for the MatchScheduleViewModel fragment.
 //The ViewModel class is designed to store and manage UI-related data in a lifecycle conscious way.
 class MatchScheduleViewModel : ViewModel() {
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is match schedule frag"
+    var matchSchedule: HashMap<String, Match> = HashMap()
+
+    fun loadMatchSchedule() {
+        matchSchedule = convertMatchScheduleListToMap(csvFileRead("match_schedule.csv", false))
     }
-    val text: LiveData<String> = _text
 }

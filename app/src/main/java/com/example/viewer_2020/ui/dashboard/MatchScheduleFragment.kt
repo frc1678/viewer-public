@@ -13,7 +13,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.fragment_match_schedule.view.*
 
@@ -27,12 +26,11 @@ class MatchScheduleFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val root = inflater.inflate(R.layout.fragment_match_schedule, container, false)
         matchScheduleViewModel =
             ViewModelProviders.of(this).get(MatchScheduleViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_match_schedule, container, false)
-        matchScheduleViewModel.text.observe(this, Observer {
-            root.text_match_schedule.text = it
-        })
+        matchScheduleViewModel.loadMatchSchedule()
+        root.lv_match_schedule.adapter = MatchScheduleListAdapter(activity!!, matchScheduleViewModel.matchSchedule)
         return root
     }
 }

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="100dp">
+
+    <TextView style="@style/tv_standard_black"
+        android:id="@+id/tv_match_number"
+        android:text="Qual 1"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="5"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView style="@style/tv_standard_white"
+                android:background="@color/Red"
+                android:id="@+id/tv_red_team_one" />
+
+            <TextView style="@style/tv_standard_white"
+                android:background="@color/Red"
+                android:id="@+id/tv_red_team_two" />
+
+            <TextView style="@style/tv_standard_white"
+                android:background="@color/Red"
+                android:id="@+id/tv_red_team_three" />
+
+            <TextView style="@style/tv_standard_black"
+                android:id="@+id/tv_red_predicted_score" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView style="@style/tv_standard_white"
+                android:background="@color/Blue"
+                android:id="@+id/tv_blue_team_one" />
+
+            <TextView style="@style/tv_standard_white"
+                android:background="@color/Blue"
+                android:id="@+id/tv_blue_team_two" />
+
+            <TextView style="@style/tv_standard_white"
+                android:background="@color/Blue"
+                android:id="@+id/tv_blue_team_three" />
+
+            <TextView style="@style/tv_standard_black"
+                android:id="@+id/tv_blue_predicted_score" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>
