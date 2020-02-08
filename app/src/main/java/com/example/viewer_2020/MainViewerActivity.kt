@@ -57,7 +57,7 @@ class MainViewerActivity : AppCompatActivity() {
         val callback: MongoDatabaseListenerUtil.Callback<DatabaseReference.CompetitionObject> = object :
             MongoDatabaseListenerUtil.Callback<DatabaseReference.CompetitionObject> {
                 override fun execute(response: DatabaseReference.CompetitionObject) {
-                    //todo 'response' is a CompetitionObject. Example: response.[raw].[qr_obj][0] will return the specified value.
+                    //todo 'response' is a CompetitionObject. Example: response.[raw].[qr][0] will return the specified value.
             }
         }
         MongoDatabaseListenerUtil().getCompetitionDocument(callback)

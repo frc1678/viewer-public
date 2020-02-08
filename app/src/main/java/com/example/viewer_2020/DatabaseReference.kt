@@ -23,18 +23,32 @@ class DatabaseReference {
     )
 
     data class Raw (
-        val qr_obj: Array<String>,
-        val qr_subj: Array<String>,
+        val qr: Array<String>,
         val pit: Array<String>
     )
 
     data class Processed (
         val replay_outdated_qr: Array<String>,
-        val unconsolodiated_obj_tim: Array<String>,
+        val unconsolidated_obj_tim: Array<UnconsolidatedObjectiveTeamInMatch>,
         val consolidated_obj_tim: Array<String>,
-        val calc_subj_aim: Array<String>,
+        val subj_aim: Array<String>,
         val calc_team: Array<String>,
         val calc_match: Array<String>,
         val calc_obj_tim: Array<String>
+    )
+
+    data class UnconsolidatedObjectiveTeamInMatch (
+        val schema_version: Int,
+        val serial_number: String,
+        val scout_name: String,
+        val match_number: Int,
+        val timestamp: Int,
+        val team_number: Int,
+        val timeline: Array<Timeline>
+    )
+
+    data class Timeline (
+        val time: Int,
+        val action_type: String
     )
 }
