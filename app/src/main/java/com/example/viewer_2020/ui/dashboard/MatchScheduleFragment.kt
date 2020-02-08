@@ -13,13 +13,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.*
 import kotlinx.android.synthetic.main.fragment_match_schedule.view.*
 
 //The fragment of the match schedule 'view' that is one of the options of the navigation bar.
 class MatchScheduleFragment : Fragment() {
 
-    private lateinit var matchScheduleViewModel: MatchScheduleViewModel
+    private val matchScheduleViewModel by lazy {
+        ViewModelProviders.of(this).get(MatchScheduleViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,10 +29,9 @@ class MatchScheduleFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_match_schedule, container, false)
-        matchScheduleViewModel =
-            ViewModelProviders.of(this).get(MatchScheduleViewModel::class.java)
-        matchScheduleViewModel.loadMatchSchedule()
-        root.lv_match_schedule.adapter = MatchScheduleListAdapter(activity!!, matchScheduleViewModel.matchSchedule)
+        matchScheduleViewModel.getMatchSchedule().observe(this, Observer<HashMap<String, Match>> { matchSchedule ->
+            root.lv_match_schedule.adapter = MatchScheduleListAdapter(activity!!, matchSchedule)
+        })
         return root
     }
 }
