@@ -18,14 +18,21 @@ import com.mongodb.stitch.core.auth.providers.anonymous.AnonymousCredential
 import com.mongodb.stitch.core.services.mongodb.remote.RemoteFindOptions
 import org.bson.Document
 
-//Class whose usage is to communicate with MongoDB, essentially making it the middle man
-//between all database-app communication.
+// Class whose usage is to communicate with MongoDB, essentially making it the middle man
+// between all database-app communication.
 class MongoDatabaseListenerUtil {
     private var stitchClient: StitchAppClient = Stitch.getDefaultAppClient()
     private var mongoClient: RemoteMongoClient = stitchClient.getServiceClient(RemoteMongoClient.factory, Constants.MONGO_ATLAS)
     private var collection = mongoClient.getDatabase(Constants.DATABASE_NAME).getCollection(Constants.COLLECTION_NAME)
 
-    //Loads the competition document of the given TBA event whose value is set in Constants/TBA_EVENT_KEY.
+    // Loads the competition document of the given TBA event whose value is set in Constants/TBA_EVENT_KEY.
+    // To request authorization, we log in to MongoDB using an anonymous credential.
+    // Afterwards, we filter the 'competition' collection to make sure we are in the right database
+    // by ensuring that the tba_event_key of the database is the one equal to the tba_event_key
+    // set in Constants.
+
+    // After accessing the correct competition, we pull every key of data that is listed in
+    // Constants.FIELDS_TO_BE_DISPLAYED.
     fun getCompetitionDocument(callback: Callback<DatabaseReference.CompetitionObject>) {
         stitchClient.auth.loginWithCredential(AnonymousCredential()).continueWithTask {
             collection.findOne(
@@ -35,15 +42,15 @@ class MongoDatabaseListenerUtil {
                 ), RemoteFindOptions().projection(Projections.fields(
                     Projections.include(Constants.FIELDS_TO_BE_DISPLAYED), Projections.excludeId()))
             ).addOnSuccessListener {
-                //If the following is true, the correct competition from MongoDB is accessed.
+                // If the following is true, the correct competition from MongoDB is accessed.
                 callback.execute(Gson().fromJson(Document(it).toJson(),
                     DatabaseReference.CompetitionObject::class.java))
             }
         }
     }
 
-    //Interface to access the CompetitionObject in an asynchronous function.
-    //Meant to be overridden on initial class usage.
+    // Interface to access the CompetitionObject in an asynchronous function.
+    // Meant to be overridden on initial class usage.
     interface Callback<T> {
         fun execute(response: T)
     }

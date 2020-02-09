@@ -36,14 +36,14 @@ fun csvFileRead(file: String, skipHeader: Boolean): MutableList<String> {
     }
 
     while (currentLine != null) {
-        //Resets the current line's value for every new line as the while loop proceeds.
+        // Resets the current line's value for every new line as the while loop proceeds.
         currentMutableLine = ""
 
         for (lineContents in currentLine) {
             currentMutableLine += " $lineContents"
         }
 
-        //Adds the current line's data to the list of the CSV file's contents (csvFileContents).
+        // Adds the current line's data to the list of the CSV file's contents (csvFileContents).
         csvFileContents.add(currentMutableLine)
         currentLine = csvReader.readNext()
     }

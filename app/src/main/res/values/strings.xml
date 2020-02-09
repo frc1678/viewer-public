@@ -6,4 +6,9 @@
     <string name="data_points_texts_match_details">EXAMPLE</string>
     <string name="title_ranking">Rankings</string>
     <string name="title_match_schedule">Match Schedule</string>
+    <string name="title_current_seed">Current Seed</string>
+    <string name="title_predicted_seed">Predicted Seed</string>
+    <string name="title_first_pick">First Pick</string>
+    <string name="title_second_pick">Second Pick</string>
+
 </resources>
