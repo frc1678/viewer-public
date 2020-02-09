@@ -11,6 +11,7 @@ package com.example.viewer_2020
 //Class that contains a collection of Constant values, or final values that never change
 class Constants {
     companion object {
+        //Game specific data.
         const val TBA_EVENT_KEY = "2020cloudtest"
         const val DATABASE_NAME = "scouting_system_cloud"
         const val COLLECTION_NAME = "competitions"
@@ -19,5 +20,15 @@ class Constants {
         val FIELDS_TO_BE_DISPLAYED: List<String> = listOf(
             "year"
         )
+
+        val FIELDS_TO_BE_DISPLAYED_MATCH_DETAILS: ArrayList<String> = arrayListOf(
+            "uno",
+            "two",
+            "tres"
+        )
+
+        //String literal translations.
+        const val TEAM_NUMBER = "teamNumber"
+        const val MATCH_NUMBER = "matchNumber"
     }
 }

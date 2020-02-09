@@ -13,7 +13,6 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -23,7 +22,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_ranking.view.*
 
 // Main activity class that handles the dual fragment view.
-class MainViewerActivity : AppCompatActivity(),
+class MainViewerActivity : ViewerActivity(),
     RankingFragment.ChildRankingFragmentHandler {
 
     companion object {
@@ -76,6 +75,7 @@ class MainViewerActivity : AppCompatActivity(),
         setContentView(R.layout.activity_main)
         verifyStoragePermissions()
         setupNavigationController(R.id.nav_host_fragment)
+        supportActionBar?.hide()
 
         // Interface to access the DatabaseReference -> CompetitionObject object that
         // should be an exact replica of every WANTED data value from MongoDB.

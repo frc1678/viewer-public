@@ -7,30 +7,37 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import kotlinx.android.synthetic.main.match_details_cell.view.*
 
-
-class MatchDetailsAdapter(private val context: Context, private val matchContents : ArrayList<String>) : BaseAdapter() {
+// Custom list adapter class for each list view of the six teams featured in every MatchDetails display.
+// TODO implement a type 'Team' object parameter to access the team data for the team number.
+class MatchDetailsAdapter(
+    private val context: Context,
+    private val datapointsDisplayed : ArrayList<String>
+) : BaseAdapter() {
 
     private val inflater: LayoutInflater
             = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
+    // Return the size of the list of the data points to be displayed.
     override fun getCount(): Int {
-        return matchContents.size
+        return datapointsDisplayed.size
     }
 
+    // Returns the specific data point given the position of the data point.
     override fun getItem(position: Int): Any {
-        return matchContents[position]
+        return datapointsDisplayed[position]
     }
 
+    // Returns the position of the cell.
     override fun getItemId(position: Int): Long {
         return position.toLong()
     }
 
+    // Populate the elements of the custom cell.
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        // Get view for row item
         val rowView = inflater.inflate(R.layout.match_details_cell, parent, false)
         rowView.tv_rank.text = (position + 1).toString() //todo CHANGE TO RANK COMPARED TO ALL TEAMS
-        rowView.tv_datapoint_name.text = matchContents[position]
-        rowView.tv_value.text = (position + 1).toString() //todo CHANGE TO VALUE OF DATAPOINT FOR THE GIVEN TEAM
+        rowView.tv_datapoint_name.text = datapointsDisplayed[position]
+        rowView.tv_value.text = ":("
 
 
         return rowView

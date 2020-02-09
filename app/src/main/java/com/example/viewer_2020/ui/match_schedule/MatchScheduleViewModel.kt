@@ -27,7 +27,11 @@ class MatchScheduleViewModel : ViewModel() {
 
     //Pulls the match schedule from the internal storage of the tablet.
     private fun loadMatchSchedule() {
-        matchSchedule.value = (convertMatchScheduleListToMap(csvFileRead("match_schedule.csv", false)))
+        matchSchedule.value = (convertMatchScheduleListToMap(csvFileRead("match_schedule.csv", false),
+            isFiltered = false,
+            matchNumber = null
+            )
+        )
     }
 
 }

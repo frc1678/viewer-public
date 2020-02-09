@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -16,24 +17,26 @@
 
             <TextView
                 style="@style/tv_data_points_top_match_details"
-                android:textColor="@color/Red"
+                android:textColor="@color/Blue"
                 />
             <TextView
                 style="@style/tv_data_points_top_match_details"
-                android:textColor="@color/Red"
+                android:textColor="@color/Blue"
                 />
             <TextView
                 style="@style/tv_data_points_top_match_details"
-                android:textColor="@color/Red"
+                android:textColor="@color/Blue"
                 />
 
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tv_match_number_display"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/match_number_match_details"
-            android:textSize="75dp"
+            android:textStyle="bold"
+            android:textSize="75sp"
             android:gravity="center">
 
         </TextView>
@@ -46,20 +49,23 @@
 
             <TextView
                 style="@style/tv_data_points_top_match_details"
-                android:textColor="@color/Blue"
+                android:textColor="@color/Red"
                 />
             <TextView
                 style="@style/tv_data_points_top_match_details"
-                android:textColor="@color/Blue"
+                android:textColor="@color/Red"
                 />
             <TextView
                 style="@style/tv_data_points_top_match_details"
-                android:textColor="@color/Blue"
+                android:textColor="@color/Red"
                 />
 
         </LinearLayout>
 
     </LinearLayout>
+
+    <View style="@style/view_separator_horizontal"
+        android:layout_height="5dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -85,18 +91,19 @@
                     <TextView
                         style="@style/tv_team_number_match_details"
                         android:id="@+id/tv_team_one"
+                        android:textColor="@color/Blue"
                        />
 
                     <ListView
+                        style="@style/lv_standard_match_details"
                         android:id="@+id/lv_team_one"
-                        android:layout_below="@+id/tv_team_one"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"/>
+                        android:layout_below="@+id/tv_team_one" />
                 </RelativeLayout>
 
-
             </FrameLayout>
+
+            <View style="@style/view_separator_vertical"/>
+
             <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -109,19 +116,21 @@
                     <TextView
                         style="@style/tv_team_number_match_details"
                         android:id="@+id/tv_team_four"
+                        android:textColor="@color/Red"
                         />
 
                     <ListView
+                        style="@style/lv_standard_match_details"
                         android:id="@+id/lv_team_four"
-                        android:layout_below="@+id/tv_team_four"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"/>
+                        android:layout_below="@+id/tv_team_four" />
                 </RelativeLayout>
 
             </FrameLayout>
 
         </LinearLayout>
+
+        <View style="@style/view_separator_horizontal"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -140,17 +149,19 @@
                     <TextView
                         style="@style/tv_team_number_match_details"
                         android:id="@+id/tv_team_two"
+                        android:textColor="@color/Blue"
                         />
 
                     <ListView
+                        style="@style/lv_standard_match_details"
                         android:id="@+id/lv_team_two"
-                        android:layout_below="@+id/tv_team_two"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"/>
+                        android:layout_below="@+id/tv_team_two" />
                 </RelativeLayout>
 
             </FrameLayout>
+
+            <View style="@style/view_separator_vertical"/>
+
             <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -162,19 +173,22 @@
                     <TextView
                         style="@style/tv_team_number_match_details"
                         android:id="@+id/tv_team_five"
+                        android:textColor="@color/Red"
                         />
 
                     <ListView
+                        style="@style/lv_standard_match_details"
                         android:id="@+id/lv_team_five"
                         android:layout_below="@+id/tv_team_five"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"/>
+                       />
                 </RelativeLayout>
 
             </FrameLayout>
 
         </LinearLayout>
+
+        <View style="@style/view_separator_horizontal"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -192,17 +206,19 @@
                     <TextView
                         style="@style/tv_team_number_match_details"
                         android:id="@+id/tv_team_three"
+                        android:textColor="@color/Blue"
                         />
 
                     <ListView
+                        style="@style/lv_standard_match_details"
                         android:id="@+id/lv_team_three"
-                        android:layout_below="@+id/tv_team_three"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"/>
+                        android:layout_below="@+id/tv_team_three"/>
                 </RelativeLayout>
 
             </FrameLayout>
+
+            <View style="@style/view_separator_vertical"/>
+
             <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -214,14 +230,15 @@
 
                     <TextView
                         style="@style/tv_team_number_match_details"
-                        android:id="@+id/tv_team_six" />
+                        android:id="@+id/tv_team_six"
+                        android:textColor="@color/Red"
+                        />
+
 
                     <ListView
+                        style="@style/lv_standard_match_details"
                         android:id="@+id/lv_team_six"
-                        android:layout_below="@+id/tv_team_six"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"/>
+                        android:layout_below="@+id/tv_team_six" />
                 </RelativeLayout>
 
             </FrameLayout>
