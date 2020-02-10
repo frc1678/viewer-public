@@ -21,10 +21,23 @@ class Constants {
             "year"
         )
 
-        val FIELDS_TO_BE_DISPLAYED_MATCH_DETAILS: ArrayList<String> = arrayListOf(
-            "uno",
-            "two",
-            "tres"
+        val FIELDS_TO_BE_DISPLAYED_MATCH_DETAILS: Map<String, ArrayList<String>> = mapOf(
+            "Auto" to arrayListOf(
+                "autoBallsInner",
+                "autoBallsOuter",
+                "autoBallsLow"
+            ),
+            "Tele" to arrayListOf(
+                "teleBallsInner",
+                "teleBallsOuter",
+                "teleBallsLow",
+                "incapTime",
+                "driverAbility"
+            ),
+            "Endgame" to arrayListOf(
+                "climbCompatibility"
+            )
+
         )
 
         //String literal translations.

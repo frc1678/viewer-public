@@ -3,15 +3,7 @@
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_weight="1"
-    android:padding="10dp">
-    <TextView
-        android:id="@+id/tv_rank"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Rank"
-        android:textSize="18dp"
-        android:textStyle="bold"/>
+    android:padding="@dimen/very_small">
 
     <TextView
         android:id="@+id/tv_datapoint_name"

@@ -13,6 +13,13 @@
         android:layout_alignParentBottom="true"
         app:menu="@menu/bottom_nav_ranking_menu" />
 
+    <View
+        android:id="@+id/view_separator"
+        android:layout_height="5dp"
+        android:layout_width="match_parent"
+        android:background="@color/Black"
+        android:layout_above="@+id/nav_ranking_view"/>
+
     <ListView
         android:id="@+id/lv_ranking"
         android:layout_width="wrap_content"

@@ -43,8 +43,8 @@ class MongoDatabaseListenerUtil {
                     Projections.include(Constants.FIELDS_TO_BE_DISPLAYED), Projections.excludeId()))
             ).addOnSuccessListener {
                 // If the following is true, the correct competition from MongoDB is accessed.
-                callback.execute(Gson().fromJson(Document(it).toJson(),
-                    DatabaseReference.CompetitionObject::class.java))
+                /*callback.execute(Gson().fromJson(Document(it).toJson(), //todo fix in schema pr.
+                    DatabaseReference.CompetitionObject::class.java))*/
             }
         }
     }

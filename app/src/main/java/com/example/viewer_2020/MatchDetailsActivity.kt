@@ -9,6 +9,7 @@
 package com.example.viewer_2020
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.ListView
 import android.widget.TextView
 import kotlinx.android.synthetic.main.match_details.*
@@ -18,6 +19,7 @@ import kotlinx.android.synthetic.main.match_details.*
 class MatchDetailsActivity : ViewerActivity() {
 
     private var matchNumber: Int? = null
+    private var currentMatchDetailsSectionMenuItem: MenuItem? = null
 
     // Returns each of the six team's summary lists that are displayed in each team's section of the match details.
     private fun getListViewCollection(): List<ListView> {
@@ -45,20 +47,34 @@ class MatchDetailsActivity : ViewerActivity() {
         tv_match_number_display.text = matchNumber.toString()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.match_details)
-        populateMatchDetailsEssentials()
-        supportActionBar?.hide()
-
+    private fun updateTeamListViews() {
         // For every team in the match details, we set the adapter for their list view according to
         // their team number and the current type Match object. We also include a list of the
         // data points we expect to be displayed on the MatchDetails list view.
         for (listView in getListViewCollection()) {
             listView.adapter = MatchDetailsAdapter(
                 context = this,
-                datapointsDisplayed = Constants.FIELDS_TO_BE_DISPLAYED_MATCH_DETAILS
+                datapointsDisplayed = Constants.FIELDS_TO_BE_DISPLAYED_MATCH_DETAILS,
+                currentSection = currentMatchDetailsSectionMenuItem.toString()
             )
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.match_details)
+        populateMatchDetailsEssentials()
+        supportActionBar?.hide()
+        if (currentMatchDetailsSectionMenuItem == null) currentMatchDetailsSectionMenuItem =
+            nav_match_details_view.menu.getItem(0); updateTeamListViews()
+
+        nav_match_details_view.setOnNavigationItemSelectedListener {
+            if (currentMatchDetailsSectionMenuItem != it) {
+                it.isChecked = true
+                currentMatchDetailsSectionMenuItem = it
+                updateTeamListViews()
+            }
+            return@setOnNavigationItemSelectedListener true
         }
 
         for (teamNumber in getTeamNumberCollection()) {

@@ -10,5 +10,8 @@
     <string name="title_predicted_seed">Predicted Seed</string>
     <string name="title_first_pick">First Pick</string>
     <string name="title_second_pick">Second Pick</string>
+    <string name="title_auto">Auto</string>
+    <string name="title_tele">Tele</string>
+    <string name="title_endgame">Endgame</string>
 
 </resources>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_match_details_auto"
+        android:icon="@drawable/ic_ranking_black_24dp"
+        android:title="@string/title_auto" />
+
+    <item
+        android:id="@+id/navigation_match_details_tele"
+        android:icon="@drawable/ic_ranking_black_24dp"
+        android:title="@string/title_tele" />
+
+    <item
+        android:id="@+id/navigation_match_details_endgame"
+        android:icon="@drawable/ic_ranking_black_24dp"
+        android:title="@string/title_endgame" />
+
+</menu>

@@ -18,6 +18,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.viewer_2020.ui.match_schedule.match_details.MatchDetailsFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_ranking.view.*
 
@@ -58,8 +59,8 @@ class MainViewerActivity : ViewerActivity(),
         }
     }
 
-    // Interface to retrieve the selected MenuItem, the view of the fragment, and whether
-    // the local currentRankingMenuItem variable should be overridden or not.
+    // Interface to retrieve the selected ranking fragment MenuItem, the view of the ranking fragment,
+    // and whether the local currentRankingMenuItem variable should be overridden or not.
     // If this function is called and currentRankingMenuItem is null (AKA the first time
     // the fragment is accessed), then it wouldn't want to reset the local variable
     // as that would create a loop because the 'reset = false' function is run at the first
@@ -69,6 +70,9 @@ class MainViewerActivity : ViewerActivity(),
         if (currentRankingMenuItem != menuItem && reset) currentRankingMenuItem = menuItem
         root.lv_ranking.adapter = RankingListAdapter(this, menuItem.toString(), true)
     }
+
+    // Override the onBackPressed to disable the back button as everything is inside fragments.
+    override fun onBackPressed() { }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -98,7 +98,7 @@ class RankingFragment : Fragment() {
         }
     }
 
-    // When the fragment is detached, this fragment library function programatically detaches the fragment
+    // When the fragment is detached, this fragment library function programmatically detaches the fragment
     // and 'resets' the MainViewerActivity-RankingFragment interface communicator.
     override fun onDetach() {
         super.onDetach()
