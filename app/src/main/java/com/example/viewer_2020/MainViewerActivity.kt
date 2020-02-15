@@ -9,8 +9,10 @@
 package com.example.viewer_2020
 
 import android.Manifest
+import android.app.AlertDialog
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Environment
 import android.view.MenuItem
 import android.view.View
 import androidx.core.app.ActivityCompat
@@ -21,6 +23,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.viewer_2020.ui.match_schedule.match_details.MatchDetailsFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_ranking.view.*
+import java.io.File
 
 // Main activity class that handles the dual fragment view.
 class MainViewerActivity : ViewerActivity(),
@@ -59,6 +62,13 @@ class MainViewerActivity : ViewerActivity(),
         }
     }
 
+    fun verifyCSVFileExists(file: String) {
+        val csvFile = File( "/storage/emulated/0/${Environment.DIRECTORY_DOWNLOADS}/$file")
+        if (!csvFile.exists()) {
+            AlertDialog.Builder(this).setMessage("There is no CSV file on this device").show()
+        }
+    }
+
     // Interface to retrieve the selected ranking fragment MenuItem, the view of the ranking fragment,
     // and whether the local currentRankingMenuItem variable should be overridden or not.
     // If this function is called and currentRankingMenuItem is null (AKA the first time
@@ -78,6 +88,7 @@ class MainViewerActivity : ViewerActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         verifyStoragePermissions()
+        verifyCSVFileExists("match_schedule.csv")
         setupNavigationController(R.id.nav_host_fragment)
         supportActionBar?.hide()
 
