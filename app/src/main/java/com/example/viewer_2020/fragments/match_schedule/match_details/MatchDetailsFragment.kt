@@ -6,7 +6,7 @@
 * Copyright 2020 Citrus Circuits. All rights reserved.
 */
 
-package com.example.viewer_2020.ui.match_schedule.match_details
+package com.example.viewer_2020.fragments.match_schedule.match_details
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,6 +17,8 @@ import android.widget.ListView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.viewer_2020.*
+import com.example.viewer_2020.constants.Constants
+import com.example.viewer_2020.fragments.team_details.TeamDetailsFragment
 import kotlinx.android.synthetic.main.match_details.view.*
 
 // The fragment class for the Match Details display that occurs when you click on a
@@ -25,6 +27,9 @@ class MatchDetailsFragment : Fragment() {
 
     private var matchNumber: Int? = null
     private var currentMatchDetailsSectionMenuItem: MenuItem? = null
+
+    private val teamDetailsFragment = TeamDetailsFragment()
+    private val teamDetailsFragmentArguments = Bundle()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -75,6 +80,13 @@ class MatchDetailsFragment : Fragment() {
                     isFiltered = true,
                     matchNumber = matchNumber)!![matchNumber.toString()]!!.redTeams[getTeamNumberCollection(root).indexOf(teamNumber) - 3]
             }
+
+            // We run this method because the code above sets each team number text view to the
+            // specified team number, and both the updateTeamListViews method and
+            // the initTeamNumberClickListener methods pull the text view's text
+            // value to access each team number.
+            updateTeamListViews(root)
+            initTeamNumberClickListeners(root)
         }
         return root
     }
@@ -91,17 +103,41 @@ class MatchDetailsFragment : Fragment() {
             root.tv_team_four, root.tv_team_five, root.tv_team_six)
     }
 
+    // Returns each of the three match details header text views that lay beside the team number.
+    private fun getHeaderCollection(root: View): List<TextView> {
+        return listOf<TextView>(root.tv_header_one, root.tv_header_two, root.tv_header_three,
+            root.tv_header_four, root.tv_header_five, root.tv_header_six)
+    }
+
+    // On every team number's specified text view, when the user clicks on the text view it will
+    // then go to a new TeamDetails page for the given team number.
+    private fun initTeamNumberClickListeners(root: View) {
+        val matchDetailsFragmentTransaction = this.fragmentManager!!.beginTransaction()
+        for (tv in getTeamNumberCollection(root)) {
+            tv.setOnClickListener {
+                teamDetailsFragmentArguments.putString(Constants.TEAM_NUMBER, tv.text.toString())
+                teamDetailsFragment.arguments = teamDetailsFragmentArguments
+                matchDetailsFragmentTransaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                matchDetailsFragmentTransaction.replace((view!!.parent as ViewGroup).id, teamDetailsFragment).commit()
+            }
+        }
+    }
+
     // Updates the adapter for the list view of each team in the match details display.
     private fun updateTeamListViews(root: View) {
         // For every team in the match details, we set the adapter for their list view according to
         // their team number and the current type Match object. We also include a list of the
         // data points we expect to be displayed on the MatchDetails list view.
         for (listView in getListViewCollection(root)) {
-            listView.adapter = MatchDetailsAdapter(
-                context = activity!!,
-                datapointsDisplayed = Constants.FIELDS_TO_BE_DISPLAYED_MATCH_DETAILS,
-                currentSection = currentMatchDetailsSectionMenuItem.toString()
-            )
+            listView.adapter =
+                MatchDetailsAdapter(
+                    context = activity!!,
+                    datapointsDisplayed = Constants.FIELDS_TO_BE_DISPLAYED_MATCH_DETAILS,
+                    currentSection = currentMatchDetailsSectionMenuItem.toString(),
+                    teamNumber = getTeamNumberCollection(root)[getListViewCollection(root).indexOf(
+                        listView
+                    )].text.toString()
+                )
         }
     }
 
@@ -118,5 +154,19 @@ class MatchDetailsFragment : Fragment() {
         }
         root.tv_match_number_display.
             text = matchNumber.toString()
+
+        for (tv in getHeaderCollection(root)) {
+            if (getHeaderCollection(root).indexOf(tv) < 3) {
+                tv.text = getAllianceInMatchObjectByKey(
+                    Constants.PROCESSED_OBJECT.CALCULATED_PREDICTED_ALLIANCE_IN_MATCH.value,
+                    Constants.BLUE, matchNumber.toString(),
+                    Constants.FIELDS_TO_BE_DISPLAYED_MATCH_DETAILS_HEADER[getHeaderCollection(root).indexOf(tv)])
+            } else {
+                tv.text = getAllianceInMatchObjectByKey(
+                    Constants.PROCESSED_OBJECT.CALCULATED_PREDICTED_ALLIANCE_IN_MATCH.value,
+                    Constants.RED, matchNumber.toString(),
+                    Constants.FIELDS_TO_BE_DISPLAYED_MATCH_DETAILS_HEADER[getHeaderCollection(root).indexOf(tv) - 3])
+            }
+        }
     }
 }

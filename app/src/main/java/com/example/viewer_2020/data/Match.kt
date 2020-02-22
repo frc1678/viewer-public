@@ -6,7 +6,7 @@
 * Copyright 2020 Citrus Circuits. All rights reserved.
 */
 
-package com.example.viewer_2020
+package com.example.viewer_2020.data
 
 //Data storage class for each individual match object.
 class Match {

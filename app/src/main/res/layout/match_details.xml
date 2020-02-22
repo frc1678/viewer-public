@@ -22,14 +22,17 @@
 
             <TextView
                 style="@style/tv_data_points_top_match_details"
+                android:id="@+id/tv_header_one"
                 android:textColor="@color/Blue"
                 />
             <TextView
                 style="@style/tv_data_points_top_match_details"
+                android:id="@+id/tv_header_two"
                 android:textColor="@color/Blue"
                 />
             <TextView
                 style="@style/tv_data_points_top_match_details"
+                android:id="@+id/tv_header_three"
                 android:textColor="@color/Blue"
                 />
 
@@ -54,14 +57,17 @@
 
             <TextView
                 style="@style/tv_data_points_top_match_details"
+                android:id="@+id/tv_header_four"
                 android:textColor="@color/Red"
                 />
             <TextView
                 style="@style/tv_data_points_top_match_details"
+                android:id="@+id/tv_header_five"
                 android:textColor="@color/Red"
                 />
             <TextView
                 style="@style/tv_data_points_top_match_details"
+                android:id="@+id/tv_header_six"
                 android:textColor="@color/Red"
                 />
 

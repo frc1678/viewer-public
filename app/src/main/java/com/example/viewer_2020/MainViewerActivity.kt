@@ -20,7 +20,10 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.viewer_2020.ui.match_schedule.match_details.MatchDetailsFragment
+import com.example.viewer_2020.constants.Constants
+import com.example.viewer_2020.constants.Translations
+import com.example.viewer_2020.data.DatabaseReference
+import com.example.viewer_2020.fragments.ranking.RankingListAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_ranking.view.*
 import java.io.File
@@ -31,6 +34,7 @@ class MainViewerActivity : ViewerActivity(),
 
     companion object {
         var currentRankingMenuItem: MenuItem? = null
+        var databaseReference: DatabaseReference.CompetitionObject? = null
     }
 
     // Populates the menu items and fragment items with the corresponding fragment IDs.
@@ -78,7 +82,35 @@ class MainViewerActivity : ViewerActivity(),
     // the currentRankingMenuItem through this function if its reset value were true.
     override fun childRankingFragmentHandlerResponse(menuItem: MenuItem, root: View, reset: Boolean) {
         if (currentRankingMenuItem != menuItem && reset) currentRankingMenuItem = menuItem
-        root.lv_ranking.adapter = RankingListAdapter(this, menuItem.toString(), true)
+        else if (!reset) currentRankingMenuItem = menuItem
+        root.lv_ranking.adapter =
+            RankingListAdapter(
+                this,
+                menuItem.toString(),
+                convertToFilteredTeamsList(
+                    Constants.PROCESSED_OBJECT.CALCULATED_PREDICTED_TEAM.value,
+                    Constants.FIELDS_TO_BE_DISPLAYED_RANKING_NAVIGATION_BAR[menuItem.toString()].toString(),
+                    csvFileRead("team_list.csv", false)[0].trim().split(" ")
+                )
+            )
+        root.tv_team_number.text = getString(R.string.team_number_text)
+        when (menuItem.toString()) {
+            Constants.FIELDS_TO_BE_DISPLAYED_RANKING_NAVIGATION_BAR.keys.toTypedArray()[0] -> {
+                root.tv_datapoint_one.text =
+                    Translations.ACTUAL_TO_HUMAN_READABLE[Constants.FIELDS_TO_BE_DISPLAYED_SECTION_ONE_RANKING[0]]
+                root.tv_datapoint_two.text =
+                    Translations.ACTUAL_TO_HUMAN_READABLE[Constants.FIELDS_TO_BE_DISPLAYED_SECTION_ONE_RANKING[1]]
+                root.tv_datapoint_three.text =
+                    Translations.ACTUAL_TO_HUMAN_READABLE[Constants.FIELDS_TO_BE_DISPLAYED_SECTION_ONE_RANKING[2]]
+            }
+            Constants.FIELDS_TO_BE_DISPLAYED_RANKING_NAVIGATION_BAR.keys.toTypedArray()[1] -> {
+                root.tv_datapoint_one.text =
+                    Translations.ACTUAL_TO_HUMAN_READABLE[Constants.FIELDS_TO_BE_DISPLAYED_SECTION_TWO_RANKING[0]]
+                root.tv_datapoint_two.text =
+                    Translations.ACTUAL_TO_HUMAN_READABLE[Constants.FIELDS_TO_BE_DISPLAYED_SECTION_TWO_RANKING[1]]
+                root.tv_datapoint_three.text = Constants.EMPTY_CHARACTER
+            }
+        }
     }
 
     // Override the onBackPressed to disable the back button as everything is inside fragments.
@@ -87,22 +119,9 @@ class MainViewerActivity : ViewerActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        supportActionBar?.hide()
         verifyStoragePermissions()
         verifyCSVFileExists("match_schedule.csv")
         setupNavigationController(R.id.nav_host_fragment)
-        supportActionBar?.hide()
-
-        // Interface to access the DatabaseReference -> CompetitionObject object that
-        // should be an exact replica of every WANTED data value from MongoDB.
-
-        // 'response' is a CompetitionObject, so you should be able to access whatever datapoint
-        // you want by referencing response. Example: response.raw.qr[0] -> specified value in database.
-        val callback: MongoDatabaseListenerUtil.Callback<DatabaseReference.CompetitionObject> = object :
-            MongoDatabaseListenerUtil.Callback<DatabaseReference.CompetitionObject> {
-                override fun execute(response: DatabaseReference.CompetitionObject) {
-                    //todo 'response' is a CompetitionObject. Example: response.[raw].[qr][0] will return the specified value.
-            }
-        }
-        MongoDatabaseListenerUtil().getCompetitionDocument(callback)
     }
 }

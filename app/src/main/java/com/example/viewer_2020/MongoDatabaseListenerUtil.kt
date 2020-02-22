@@ -8,6 +8,8 @@
 
 package com.example.viewer_2020
 
+import com.example.viewer_2020.constants.Constants
+import com.example.viewer_2020.data.DatabaseReference
 import com.google.gson.Gson
 import com.mongodb.client.model.Filters
 import com.mongodb.client.model.Projections
@@ -17,13 +19,16 @@ import com.mongodb.stitch.android.services.mongodb.remote.RemoteMongoClient
 import com.mongodb.stitch.core.auth.providers.anonymous.AnonymousCredential
 import com.mongodb.stitch.core.services.mongodb.remote.RemoteFindOptions
 import org.bson.Document
+import java.lang.Exception
+import java.lang.reflect.Field
 
 // Class whose usage is to communicate with MongoDB, essentially making it the middle man
 // between all database-app communication.
 class MongoDatabaseListenerUtil {
     private var stitchClient: StitchAppClient = Stitch.getDefaultAppClient()
     private var mongoClient: RemoteMongoClient = stitchClient.getServiceClient(RemoteMongoClient.factory, Constants.MONGO_ATLAS)
-    private var collection = mongoClient.getDatabase(Constants.DATABASE_NAME).getCollection(Constants.COLLECTION_NAME)
+    private var collection = mongoClient.getDatabase(Constants.DATABASE_NAME).getCollection(
+        Constants.COLLECTION_NAME)
 
     // Loads the competition document of the given TBA event whose value is set in Constants/TBA_EVENT_KEY.
     // To request authorization, we log in to MongoDB using an anonymous credential.
@@ -42,9 +47,60 @@ class MongoDatabaseListenerUtil {
                 ), RemoteFindOptions().projection(Projections.fields(
                     Projections.include(Constants.FIELDS_TO_BE_DISPLAYED), Projections.excludeId()))
             ).addOnSuccessListener {
-                // If the following is true, the correct competition from MongoDB is accessed.
-                /*callback.execute(Gson().fromJson(Document(it).toJson(), //todo fix in schema pr.
-                    DatabaseReference.CompetitionObject::class.java))*/
+                callback.execute(Gson().fromJson(Document(it).toJson(),
+                    DatabaseReference.CompetitionObject::class.java))
+            }
+        }
+    }
+
+    // Watches the specified MongoDB collection and listens for any changes made throughout
+    // the whole project.
+
+    // The event.operationType can be both UPDATE and REPLACE
+    // If the operationType is REPLACE, then the event.updateDescription will return null,
+    // meaning you cannot access the updates made to the database when the listener is triggered.
+
+    // The operationType will be REPLACE when the database is manually altered on MongoDB compass,
+    // so to have the operationType remain as UPDATE, you must make changes to the database
+    // programmatically on the server-side.
+    fun startDatabaseListener() {
+        collection.watch().addOnCompleteListener {
+            it.result.addChangeEventListener { _, event ->
+                event.updateDescription?.updatedFields?.keys!!.forEach { change ->
+                    val key = (change.substring(0, change.indexOf(".")))
+                    val subKey = (change.substring(key.length + 1, change.length)).substring(
+                        0,
+                        (change.substring(key.length + 1, change.length)).indexOf(".")
+                    ).trim()
+                    val index: String =
+                        (change.substring(change.lastIndexOf(".") + 1, change.length))
+                    event.updateDescription?.updatedFields!!["$key.$subKey.$index"]!!.asDocument()!!.keys.forEach { changedField ->
+                        val databaseReference = MainViewerActivity.databaseReference!!
+                        val currentSubKeyReference: Field =
+                            getDirectField(databaseReference, key)::class.java.getDeclaredField(subKey)
+                        currentSubKeyReference.isAccessible = true
+                        val currentDataValueInSubKey =
+                            (currentSubKeyReference.get(databaseReference.processed)!! as Array<*>)[index.toInt()]
+                        val currentDataValueFromSubKeyReference = currentDataValueInSubKey!!::class.java.getDeclaredField(changedField)
+                        currentDataValueFromSubKeyReference.isAccessible = true
+                        try {
+                            currentDataValueFromSubKeyReference[currentDataValueInSubKey] = (event.updateDescription?.updatedFields!!
+                                    ["$key.$subKey.$index"]!!.asDocument().getInt32(changedField).value)
+                        } catch (e: Exception){
+                            try {
+                                currentDataValueFromSubKeyReference[currentDataValueInSubKey] = (event.updateDescription?.updatedFields!!
+                                        ["$key.$subKey.$index"]!!.asDocument().getDouble(changedField).value)
+                            } catch (e: Exception) {
+                                try {
+                                    currentDataValueFromSubKeyReference[currentDataValueInSubKey] = (event.updateDescription?.updatedFields!!
+                                            ["$key.$subKey.$index"]!!.asDocument().getString(changedField).value)
+                                } catch (e: Exception) {
+                                    e.printStackTrace()
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }

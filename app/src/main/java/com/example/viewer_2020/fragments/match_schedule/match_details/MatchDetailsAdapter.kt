@@ -1,4 +1,4 @@
-package com.example.viewer_2020
+package com.example.viewer_2020.fragments.match_schedule.match_details
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,6 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import androidx.fragment.app.FragmentActivity
+import com.example.viewer_2020.R
+import com.example.viewer_2020.constants.Constants
+import com.example.viewer_2020.constants.Translations
+import com.example.viewer_2020.getTeamObjectByKey
 import kotlinx.android.synthetic.main.match_details_cell.view.*
 
 // Custom list adapter class for each list view of the six teams featured in every MatchDetails display.
@@ -13,7 +17,8 @@ import kotlinx.android.synthetic.main.match_details_cell.view.*
 class MatchDetailsAdapter(
     private val context: FragmentActivity,
     private val datapointsDisplayed: Map<String, ArrayList<String>>,
-    private val currentSection: String
+    private val currentSection: String,
+    private val teamNumber: String
 ) : BaseAdapter() {
 
     private val inflater: LayoutInflater
@@ -37,10 +42,13 @@ class MatchDetailsAdapter(
     // Populate the elements of the custom cell.
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val rowView = inflater.inflate(R.layout.match_details_cell, parent, false)
-        rowView.tv_datapoint_name.text = datapointsDisplayed[currentSection]?.get(position)
-        rowView.tv_value.text = ":("
-
-
+        rowView.tv_datapoint_name.text =
+            Translations.ACTUAL_TO_HUMAN_READABLE[datapointsDisplayed[currentSection]?.get(position)] ?:
+                datapointsDisplayed[currentSection]?.get(position)
+        rowView.tv_value.text = getTeamObjectByKey(
+            Constants.PROCESSED_OBJECT.CALCULATED_OBJECTIVE_TEAM.value, teamNumber,
+            datapointsDisplayed[currentSection]?.get(position)!!
+        )
         return rowView
     }
 }

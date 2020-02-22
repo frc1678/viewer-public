@@ -16,6 +16,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
+import com.example.viewer_2020.constants.Constants
+import com.example.viewer_2020.fragments.team_details.TeamDetailsFragment
 import kotlinx.android.synthetic.main.fragment_ranking.view.*
 
 // The fragment of the ranking lists 'view' that is one of the options of the navigation bar.
@@ -26,6 +28,9 @@ import kotlinx.android.synthetic.main.fragment_ranking.view.*
 class RankingFragment : Fragment() {
 
     private var mListener: ChildRankingFragmentHandler? = null
+
+    private val teamDetailsFragment = TeamDetailsFragment()
+    private val teamDetailsFragmentArguments = Bundle()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -78,6 +83,23 @@ class RankingFragment : Fragment() {
             //Inputs 'it' as the MenuItem value as 'it' is the selected MenuItem.
             mListener!!.childRankingFragmentHandlerResponse(it, root, true)
             return@setOnNavigationItemSelectedListener true
+        }
+
+        root.lv_ranking.setOnItemClickListener { _, _, position, _ ->
+            val rankingFragmentTransaction = this.fragmentManager!!.beginTransaction()
+            teamDetailsFragmentArguments.putString(
+                Constants.TEAM_NUMBER, convertToFilteredTeamsList(
+                    Constants.PROCESSED_OBJECT.CALCULATED_PREDICTED_TEAM.value,
+                    Constants.FIELDS_TO_BE_DISPLAYED_RANKING_NAVIGATION_BAR[MainViewerActivity.currentRankingMenuItem.toString()].toString(),
+                    csvFileRead("team_list.csv", false)[0].trim().split(" ")
+                )[position]
+            )
+            teamDetailsFragment.arguments = teamDetailsFragmentArguments
+            rankingFragmentTransaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+            rankingFragmentTransaction.replace(
+                (view!!.parent as ViewGroup).id,
+                teamDetailsFragment
+            ).commit()
         }
         return root
     }

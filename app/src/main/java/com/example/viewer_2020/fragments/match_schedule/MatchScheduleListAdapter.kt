@@ -6,7 +6,7 @@
 * Copyright 2020 Citrus Circuits. All rights reserved.
 */
 
-package com.example.viewer_2020
+package com.example.viewer_2020.fragments.match_schedule
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -14,6 +14,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import com.example.viewer_2020.data.Match
+import com.example.viewer_2020.R
+import com.example.viewer_2020.constants.Constants
+import com.example.viewer_2020.getAllianceInMatchObjectByKey
 
 //Custom list adapter class with Match object handling to display the custom cell for the match schedule.
 class MatchScheduleListAdapter(private val context: Context, private val matchContents : HashMap<String, Match>) : BaseAdapter() {
@@ -39,10 +44,13 @@ class MatchScheduleListAdapter(private val context: Context, private val matchCo
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val viewHolder: ViewHolder
         val rowView: View?
-
+        val matchNumber: String = (position + 1).toString()
         if (convertView == null) {
             rowView = inflater.inflate(R.layout.match_schedule_cell, parent, false)
-            viewHolder = ViewHolder(rowView)
+            viewHolder =
+                ViewHolder(
+                    rowView
+                )
             rowView.tag = viewHolder
         } else {
             rowView = convertView
@@ -50,16 +58,46 @@ class MatchScheduleListAdapter(private val context: Context, private val matchCo
         }
 
         for (tv in listOf(viewHolder.tvRedTeamOne, viewHolder.tvRedTeamTwo, viewHolder.tvRedTeamThree)) {
-            tv.text = matchContents[(position + 1).toString()]!!.redTeams[0 +
+            tv.text = matchContents[matchNumber]!!.redTeams[0 +
                     listOf(viewHolder.tvRedTeamOne, viewHolder.tvRedTeamTwo, viewHolder.tvRedTeamThree).indexOf(tv)]
         }
         for (tv in listOf(viewHolder.tvBlueTeamOne, viewHolder.tvBlueTeamTwo, viewHolder.tvBlueTeamThree)) {
-            tv.text = matchContents[(position + 1).toString()]!!.blueTeams[0 +
+            tv.text = matchContents[matchNumber]!!.blueTeams[0 +
                     listOf(viewHolder.tvBlueTeamOne, viewHolder.tvBlueTeamTwo, viewHolder.tvBlueTeamThree).indexOf(tv)]
         }
-        viewHolder.tvMatchNumber.text = (position + 1).toString()
-        viewHolder.tvBluePredictedScore.text = "100" //todo auto populate
-        viewHolder.tvRedPredictedScore.text = "100" //todo auto populate
+        viewHolder.tvMatchNumber.text = matchNumber
+        viewHolder.tvBluePredictedScore.text =
+            if (getAllianceInMatchObjectByKey(
+                    Constants.PROCESSED_OBJECT.CALCULATED_PREDICTED_ALLIANCE_IN_MATCH.value,
+                    Constants.BLUE, matchNumber, "predicted_score"
+                ) != Constants.NULL_CHARACTER)
+                getAllianceInMatchObjectByKey(
+                    Constants.PROCESSED_OBJECT.CALCULATED_PREDICTED_ALLIANCE_IN_MATCH.value,
+                    Constants.BLUE, matchNumber, "predicted_score"
+                )
+            else Constants.NULL_PREDICTED_SCORE_CHARACTER
+
+        viewHolder.tvRedPredictedScore.text =
+            if (getAllianceInMatchObjectByKey(
+                    Constants.PROCESSED_OBJECT.CALCULATED_PREDICTED_ALLIANCE_IN_MATCH.value,
+                    Constants.RED, matchNumber, "predicted_score"
+                ) != Constants.NULL_CHARACTER)
+                getAllianceInMatchObjectByKey(
+                    Constants.PROCESSED_OBJECT.CALCULATED_PREDICTED_ALLIANCE_IN_MATCH.value,
+                    Constants.RED, matchNumber, "predicted_score"
+                )
+            else Constants.NULL_PREDICTED_SCORE_CHARACTER
+        for (tv in listOf(viewHolder.tvBluePredictedScore, viewHolder.tvRedPredictedScore)) {
+            if (tv.text == Constants.NULL_PREDICTED_SCORE_CHARACTER) {
+                tv.setTextColor(ContextCompat.getColor(context,
+                    R.color.ElectricGreen
+                ))
+            } else {
+                tv.setTextColor(ContextCompat.getColor(context,
+                    R.color.Black
+                ))
+            }
+        }
         return rowView!!
     }
 

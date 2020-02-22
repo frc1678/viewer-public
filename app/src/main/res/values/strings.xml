@@ -8,10 +8,9 @@
     <string name="title_match_schedule">Match Schedule</string>
     <string name="title_current_seed">Current Seed</string>
     <string name="title_predicted_seed">Predicted Seed</string>
-    <string name="title_first_pick">First Pick</string>
-    <string name="title_second_pick">Second Pick</string>
     <string name="title_auto">Auto</string>
     <string name="title_tele">Tele</string>
     <string name="title_endgame">Endgame</string>
+    <string name="team_number_text">Team #</string>
 
 </resources>

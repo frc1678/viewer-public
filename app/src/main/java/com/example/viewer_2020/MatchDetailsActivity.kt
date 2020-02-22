@@ -12,6 +12,8 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.ListView
 import android.widget.TextView
+import com.example.viewer_2020.constants.Constants
+import com.example.viewer_2020.fragments.match_schedule.match_details.MatchDetailsAdapter
 import kotlinx.android.synthetic.main.match_details.*
 
 // Displays the match details of a match from the match schedule.
@@ -52,11 +54,13 @@ class MatchDetailsActivity : ViewerActivity() {
         // their team number and the current type Match object. We also include a list of the
         // data points we expect to be displayed on the MatchDetails list view.
         for (listView in getListViewCollection()) {
-            listView.adapter = MatchDetailsAdapter(
-                context = this,
-                datapointsDisplayed = Constants.FIELDS_TO_BE_DISPLAYED_MATCH_DETAILS,
-                currentSection = currentMatchDetailsSectionMenuItem.toString()
-            )
+            listView.adapter =
+                MatchDetailsAdapter(
+                    context = this,
+                    datapointsDisplayed = Constants.FIELDS_TO_BE_DISPLAYED_MATCH_DETAILS,
+                    currentSection = currentMatchDetailsSectionMenuItem.toString(),
+                    teamNumber = getTeamNumberCollection()[getListViewCollection().indexOf(listView)].text.toString()
+                )
         }
     }
 

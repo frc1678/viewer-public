@@ -8,6 +8,8 @@
 
 package com.example.viewer_2020
 
+import com.example.viewer_2020.data.Match
+
 val matchScheduleMap: HashMap<String, Match> = HashMap()
 
 //Converts the match schedule literal list pulled from a csv into a key to value format.

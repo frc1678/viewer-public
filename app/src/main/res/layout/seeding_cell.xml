@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:padding="@dimen/very_small"
+    android:layout_height="wrap_content">
+
+    <TextView
+        style="@style/tv_standard_black"
+        android:id="@+id/tv_team_number"/>
+
+    <TextView
+        style="@style/tv_standard_gray"
+        android:id="@+id/tv_datapoint_one"/>
+
+    <TextView
+        style="@style/tv_standard_gray"
+        android:id="@+id/tv_datapoint_two"/>
+
+    <TextView
+        style="@style/tv_standard_gray"
+        android:id="@+id/tv_datapoint_three"/>
+</LinearLayout>

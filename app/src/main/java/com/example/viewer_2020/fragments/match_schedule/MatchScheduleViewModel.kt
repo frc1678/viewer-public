@@ -11,6 +11,7 @@ package com.example.viewer_2020
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.viewer_2020.data.Match
 
 
 //Fragment view handler for the MatchScheduleViewModel fragment.

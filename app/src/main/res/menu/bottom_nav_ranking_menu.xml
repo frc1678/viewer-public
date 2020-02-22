@@ -11,13 +11,4 @@
         android:icon="@drawable/ic_ranking_black_24dp"
         android:title="@string/title_predicted_seed" />
 
-    <item
-        android:id="@+id/navigation_ranking_first_pick"
-        android:icon="@drawable/ic_ranking_black_24dp"
-        android:title="@string/title_first_pick" />
-
-    <item
-        android:id="@+id/navigation_ranking_second_pick"
-        android:icon="@drawable/ic_ranking_black_24dp"
-        android:title="@string/title_second_pick" />
 </menu>

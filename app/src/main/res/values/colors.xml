@@ -3,9 +3,10 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="Red">#ff0000</color>
-    <color name="Blue">#0000ff</color>
-    <color name="ElectricGreen">#00ff2a</color>
+    <color name="Red">#C92020</color>
+    <color name="Blue">#3498db</color>
+    <color name="ElectricGreen">#27ae60</color>
     <color name="Black">#000000</color>
-    <color name="White">#ffffff</color>
+    <color name="White">#fbfcfc</color>
+    <color name="Gray">#5d6d7e</color>
 </resources>
