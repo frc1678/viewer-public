@@ -11,6 +11,7 @@
     <string name="title_auto">Auto</string>
     <string name="title_tele">Tele</string>
     <string name="title_endgame">Endgame</string>
+    <string name="title_our_schedule">Our Schedule</string>
     <string name="team_number_text">Team #</string>
 
 </resources>

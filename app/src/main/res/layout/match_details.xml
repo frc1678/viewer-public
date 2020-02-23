@@ -267,7 +267,7 @@
         android:layout_height="wrap_content"
         android:background="?android:attr/windowBackground"
         android:layout_alignParentBottom="true"
-        app:menu="@menu/nav_match_details"/>
+        app:menu="@menu/bottom_nav_match_details_menu"/>
 
 
 </LinearLayout>

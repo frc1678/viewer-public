@@ -15,36 +15,59 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import com.example.viewer_2020.*
 import com.example.viewer_2020.data.Match
-import com.example.viewer_2020.R
 import com.example.viewer_2020.constants.Constants
-import com.example.viewer_2020.getAllianceInMatchObjectByKey
 
-//Custom list adapter class with Match object handling to display the custom cell for the match schedule.
-class MatchScheduleListAdapter(private val context: Context, private val matchContents : HashMap<String, Match>) : BaseAdapter() {
+// Custom list adapter class with Match object handling to display the custom cell for the match schedule.
+class MatchScheduleListAdapter(
+    private val context: Context,
+    private var matchContents: HashMap<String, Match>,
+    private val section: String
+) : BaseAdapter() {
+
+    init {
+        if (section == "Our Schedule") {
+            val amendedMap = HashMap<String, Match>()
+            for (match in matchContents) {
+                if (Constants.MY_TEAM_NUMBER in match.value.blueTeams ||
+                        Constants.MY_TEAM_NUMBER in match.value.redTeams) {
+                    amendedMap[match.key] = match.value
+                }
+            }
+            matchContents = amendedMap
+        }
+    }
 
     private val inflater = LayoutInflater.from(context)
 
-    //Return the size of the match schedule.
+    // Return the size of the match schedule.
     override fun getCount(): Int {
-        return matchContents.size
+        return if (section == "Our Schedule") getTeamSpecificMatchNumbers(Constants.MY_TEAM_NUMBER).size
+            else matchContents.size
     }
 
-    //Return the Match object given the match number.
+    // Return the Match object given the match number.
     override fun getItem(position: Int): Any {
-        return matchContents[(position + 1).toString()] as Any
+        return if (section == "Our Schedule")
+            getTeamSpecificMatchNumbers(Constants.MY_TEAM_NUMBER)[position]
+        else matchContents[(position + 1).toString()] as Any
     }
 
-    //Return the position of the cell.
+    // Return the position of the cell.
     override fun getItemId(position: Int): Long {
         return position.toLong()
     }
 
-    //Populate the elements of the custom cell.
+    // Populate the elements of the custom cell.
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val viewHolder: ViewHolder
         val rowView: View?
-        val matchNumber: String = (position + 1).toString()
+        val matchNumber: String =
+            if (section == "Our Schedule") getTeamSpecificMatchNumbers(Constants.MY_TEAM_NUMBER)[position]
+            else (position + 1).toString()
+
+
         if (convertView == null) {
             rowView = inflater.inflate(R.layout.match_schedule_cell, parent, false)
             viewHolder =
@@ -101,7 +124,7 @@ class MatchScheduleListAdapter(private val context: Context, private val matchCo
         return rowView!!
     }
 
-    //View holder class to handle the elements used in the custom cells.
+    // View holder class to handle the elements used in the custom cells.
     private class ViewHolder(view: View?) {
         val tvMatchNumber = view?.findViewById(R.id.tv_match_number) as TextView
         val tvBluePredictedScore = view?.findViewById(R.id.tv_blue_predicted_score) as TextView

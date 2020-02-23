@@ -30,7 +30,7 @@ class DatabaseReference {
     data class Processed (
         var replay_outdated_qr: Array<String>,
         var unconsolidated_obj_tim: Array<UnconsolidatedObjectiveTeamInMatch>,
-        var calc_obj_tim: Array<String>,
+        var calc_obj_tim: Array<CalculatedObjectiveTeamInMatch>,
         var subj_aim: Array<String>,
         var calc_obj_team: Array<CalculatedObjectiveTeam>,
         var calc_subj_team: Array<CalculatedSubjectiveTeam>,
@@ -57,6 +57,11 @@ class DatabaseReference {
         var climb_all_successes_avg_time: Float,
         var auto_line_successes: Float,
         var team_number: Int
+    )
+
+    data class CalculatedObjectiveTeamInMatch (
+        var team_number: Int,
+        var match_number: Int
     )
 
     data class CalculatedPickAbilityTeam (

@@ -16,6 +16,7 @@ class Constants {
         const val DATABASE_NAME = "scouting_system_cloud"
         const val COLLECTION_NAME = "competitions"
         const val MONGO_ATLAS = "mongodb-atlas"
+        const val MY_TEAM_NUMBER = "58"
 
         val FIELDS_TO_BE_DISPLAYED: List<String> = listOf(
             "processed"

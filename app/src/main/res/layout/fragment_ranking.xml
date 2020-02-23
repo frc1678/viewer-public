@@ -55,6 +55,7 @@
         android:id="@+id/lv_ranking"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ll_ranking_key"/>
+        android:layout_below="@+id/ll_ranking_key"
+        android:layout_above="@+id/view_separator"/>
 
 </RelativeLayout>
