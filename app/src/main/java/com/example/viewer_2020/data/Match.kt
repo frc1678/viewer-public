@@ -8,11 +8,8 @@
 
 package com.example.viewer_2020.data
 
-//Data storage class for each individual match object.
-class Match {
-    var matchNumber: String? = null
-    var redTeams = ArrayList<String>()
-    var blueTeams = ArrayList<String>()
-    var redActualScore: Int? = null
-    var blueActualScore: Int? = null
+// Data storage class for each individual match object.
+data class Match(var matchNumber: String) {
+    var redTeams: ArrayList<String> = ArrayList()
+    var blueTeams: ArrayList<String> = ArrayList()
 }

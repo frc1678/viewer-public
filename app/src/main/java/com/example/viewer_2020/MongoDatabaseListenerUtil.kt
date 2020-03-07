@@ -95,7 +95,12 @@ class MongoDatabaseListenerUtil {
                                     currentDataValueFromSubKeyReference[currentDataValueInSubKey] = (event.updateDescription?.updatedFields!!
                                             ["$key.$subKey.$index"]!!.asDocument().getString(changedField).value)
                                 } catch (e: Exception) {
-                                    e.printStackTrace()
+                                    try {
+                                        currentDataValueFromSubKeyReference[currentDataValueInSubKey] = (event.updateDescription?.updatedFields!!
+                                                ["$key.$subKey.$index"]!!.asDocument().getBoolean(changedField).value)
+                                    } catch (e: Exception) {
+                                        e.printStackTrace()
+                                    }
                                 }
                             }
                         }

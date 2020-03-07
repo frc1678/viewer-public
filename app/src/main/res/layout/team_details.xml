@@ -12,18 +12,18 @@
         android:layout_above="@+id/nav_team_details_view">
 
         <TextView
-            style="@style/tv_team_number_match_details"
+            style="@style/tv_team_number_team_details"
             android:id="@+id/tv_team_number"/>
 
         <TextView
-            style="@style/tv_data_points_top_match_details"
+            style="@style/tv_team_number_team_details_sub"
             android:id="@+id/tv_section_display"/>
 
         <ListView
             android:id="@+id/lv_datapoint_display"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="5"/>
+            android:layout_weight="1"/>
 
     </LinearLayout>
 

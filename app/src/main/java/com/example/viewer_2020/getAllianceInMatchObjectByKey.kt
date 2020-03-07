@@ -18,12 +18,22 @@ import com.example.viewer_2020.constants.Constants
 // bit heavy, yet there's no obvious better way to do it given the structure of our database.
 
 // If the value cannot be found, then it returns whatever character is set in Constants -> NULL_CHARACTER.
-fun getAllianceInMatchObjectByKey(path: String, allianceColor: String, matchNumber: String, field: String): String {
+fun getAllianceInMatchObjectByKey(
+    path: String,
+    allianceColor: String,
+    matchNumber: String,
+    field: String
+): String {
     for (`object` in getDirectField(MainViewerActivity.databaseReference!!.processed, path)
             as Array<*>) {
-        if (getDirectField(`object`!!, "match_number").toString() == matchNumber &&
-                getDirectField(`object`, "alliance_color").toString() == allianceColor) {
-            return getDirectField(`object`, field).toString()
+        if (getDirectField(`object`!!, "match_number").toString() == matchNumber) {
+            if (getDirectField(`object`, "alliance_color_is_red").toString() ==
+                (allianceColor == "red").toString()) {
+                return getDirectField(`object`, field).toString()
+            } else if (getDirectField(`object`, "alliance_color_is_red").toString() ==
+                    (allianceColor == "blue").toString()) {
+                return getDirectField(`object`, field).toString()
+            }
         }
     }
     return Constants.NULL_CHARACTER

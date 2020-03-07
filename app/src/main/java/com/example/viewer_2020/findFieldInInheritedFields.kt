@@ -21,8 +21,7 @@ fun findFieldInInheritedFields(
         val value = `object`.getDeclaredField(field)
         value.isAccessible = true
         value
-    } catch (nsfe: NoSuchFieldException) {
-        nsfe.printStackTrace()
+    } catch (e: Exception) {
         // If this is reached, it means that the field you inputted doesn't exist in DatabaseReference.
         findFieldInInheritedFields(`object`.superclass!!, field)
     }

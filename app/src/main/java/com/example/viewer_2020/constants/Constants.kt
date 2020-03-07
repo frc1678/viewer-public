@@ -12,43 +12,69 @@ package com.example.viewer_2020.constants
 class Constants {
     companion object {
         //Game specific data.
-        const val TBA_EVENT_KEY = "2020cloudtest"
+        const val TBA_EVENT_KEY = "2020caln"
         const val DATABASE_NAME = "scouting_system_cloud"
         const val COLLECTION_NAME = "competitions"
         const val MONGO_ATLAS = "mongodb-atlas"
-        const val MY_TEAM_NUMBER = "58"
+        const val MY_TEAM_NUMBER = "1678"
 
         val FIELDS_TO_BE_DISPLAYED: List<String> = listOf(
-            "processed"
+            "processed",
+            "raw"
         )
 
         val FIELDS_TO_BE_DISPLAYED_MATCH_DETAILS: Map<String, ArrayList<String>> = mapOf(
             "Auto" to arrayListOf(
                 "auto_avg_balls_low",
-                "auto_avg_balls_high"
+                "auto_avg_balls_high",
+                "auto_high_balls_percent_inner",
+                "auto_line_successes"
             ),
             "Tele" to arrayListOf(
+                "driver_ability",
                 "tele_avg_balls_low",
                 "tele_avg_balls_high",
-                "tele_avg_time_incap"
+                "tele_high_balls_percent_inner",
+                "tele_cp_rotation_successes",
+                "tele_cp_position_successes"
             ),
             "Endgame" to arrayListOf(
-                "climb_all_attempts"
+                "climb_all_attempts",
+                "climber_strap_installation_time",
+                "climb_all_success_avg_time",
+                "climb_solo_level_successes"
             )
         )
 
         val FIELDS_TO_BE_DISPLAYED_TEAM_DETAILS: Map<String, ArrayList<String>> = mapOf(
             "Auto" to arrayListOf(
                 "auto_avg_balls_low",
-                "auto_avg_balls_high"
+                "auto_avg_balls_high",
+                "auto_high_balls_percent_inner",
+                "auto_line_successes"
             ),
             "Tele" to arrayListOf(
+                "team_name",
+                "driver_ability",
                 "tele_avg_balls_low",
                 "tele_avg_balls_high",
-                "tele_avg_time_incap"
+                "tele_high_balls_percent_inner",
+                "tele_cp_rotation_successes",
+                "tele_cp_position_successes",
+                "can_cross_trench",
+                "drivetrain",
+                "drivetrain_motors",
+                "drivetrain_motor_type",
+                "has_ground_intake"
             ),
             "Endgame" to arrayListOf(
-                "climb_all_attempts"
+                "climb_all_attempts",
+                "climb_all_successes",
+                "climb_solo_level_successes",
+                "park_successes",
+                "auto_line_successes",
+                "climb_all_success_avg_time",
+                "climber_strap_installation_notes"
             )
         )
 

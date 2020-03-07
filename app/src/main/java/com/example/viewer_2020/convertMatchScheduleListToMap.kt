@@ -47,7 +47,7 @@ fun convertMatchScheduleListToMap(
                 if (match.trim().split(" ")[0] != matchNumber.toString()) {
                     continue
                 }
-                val currentMatch = Match()
+                val currentMatch = Match(matchNumber.toString())
                 for (index in 1..3) currentMatch.blueTeams.add(removeTeamPrefix(match.trim().split(" ")[index]))
                 for (index in 4..6) currentMatch.redTeams.add(removeTeamPrefix(match.trim().split(" ")[index]))
                 currentMatch.matchNumber = match.trim().split(" ")[0]
@@ -60,7 +60,7 @@ fun convertMatchScheduleListToMap(
         }
         false -> {
             for (match in matchScheduleList) {
-                val currentMatch = Match()
+                val currentMatch = Match(matchNumber.toString())
                 for (index in 1..3) currentMatch.blueTeams.add(removeTeamPrefix(match.trim().split(" ")[index]))
                 for (index in 4..6) currentMatch.redTeams.add(removeTeamPrefix(match.trim().split(" ")[index]))
                 currentMatch.matchNumber = match.trim().split(" ")[0]

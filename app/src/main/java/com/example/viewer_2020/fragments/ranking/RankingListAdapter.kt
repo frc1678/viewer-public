@@ -20,9 +20,9 @@ import com.example.viewer_2020.getTeamObjectByKey
 
 // Custom list adapter class with aq object handling to display the custom cell for the match schedule.
 class RankingListAdapter(
-        private val context: Context,
-        private val section: String,
-        private val listContents: List<String>
+    private val context: Context,
+    private val section: String,
+    private val listContents: List<String>
 ): BaseAdapter() {
 
     private val inflater = LayoutInflater.from(context)
@@ -86,10 +86,10 @@ class RankingListAdapter(
             field)
     }
 }
-    // View holder class to handle the elements used in the custom cells.
-    private class ViewHolder(view: View?) {
-        val tvTeamNumber = view?.findViewById(R.id.tv_team_number) as TextView
-        val tvDatapointOne = view?.findViewById(R.id.tv_datapoint_one) as TextView
-        val tvDatapointTwo = view?.findViewById(R.id.tv_datapoint_two) as TextView
-        val tvDatapointThree = view?.findViewById(R.id.tv_datapoint_three) as TextView
-    }
+// View holder class to handle the elements used in the custom cells.
+private class ViewHolder(view: View?) {
+    val tvTeamNumber = view?.findViewById(R.id.tv_team_number) as TextView
+    val tvDatapointOne = view?.findViewById(R.id.tv_datapoint_one) as TextView
+    val tvDatapointTwo = view?.findViewById(R.id.tv_datapoint_two) as TextView
+    val tvDatapointThree = view?.findViewById(R.id.tv_datapoint_three) as TextView
+}

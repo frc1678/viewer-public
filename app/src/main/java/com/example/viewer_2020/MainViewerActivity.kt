@@ -22,7 +22,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.viewer_2020.constants.Constants
 import com.example.viewer_2020.constants.Translations
-import com.example.viewer_2020.data.DatabaseReference
+import com.example.viewer_2020.data.*
 import com.example.viewer_2020.fragments.ranking.RankingListAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_ranking.view.*
@@ -35,6 +35,7 @@ class MainViewerActivity : ViewerActivity(),
     companion object {
         var currentRankingMenuItem: MenuItem? = null
         var databaseReference: DatabaseReference.CompetitionObject? = null
+        var teamCache: HashMap<String, Team> = HashMap()
     }
 
     // Populates the menu items and fragment items with the corresponding fragment IDs.
