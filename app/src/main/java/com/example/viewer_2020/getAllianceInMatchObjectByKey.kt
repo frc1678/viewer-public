@@ -27,13 +27,12 @@ fun getAllianceInMatchObjectByKey(
     for (`object` in getDirectField(MainViewerActivity.databaseReference!!.processed, path)
             as Array<*>) {
         if (getDirectField(`object`!!, "match_number").toString() == matchNumber) {
-            if (getDirectField(`object`, "alliance_color_is_red").toString() ==
-                (allianceColor == "red").toString()) {
+            if (getDirectField(`object`, "alliance_color_is_red").toString() == "true" &&
+                    allianceColor == "red")
                 return getDirectField(`object`, field).toString()
-            } else if (getDirectField(`object`, "alliance_color_is_red").toString() ==
-                    (allianceColor == "blue").toString()) {
+            else if (getDirectField(`object`, "alliance_color_is_red").toString() == "false" &&
+                allianceColor == "blue")
                 return getDirectField(`object`, field).toString()
-            }
         }
     }
     return Constants.NULL_CHARACTER
