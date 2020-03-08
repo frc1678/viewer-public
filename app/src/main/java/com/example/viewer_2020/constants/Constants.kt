@@ -54,6 +54,8 @@ class Constants {
             "Tele" to arrayListOf(
                 "team_name",
                 "driver_ability",
+                "tele_avg_balls_low",
+                "tele_avg_balls_high",
                 "tele_cp_rotation_successes",
                 "tele_cp_position_successes",
                 "can_cross_trench",
