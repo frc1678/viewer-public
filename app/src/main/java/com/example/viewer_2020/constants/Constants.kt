@@ -12,7 +12,7 @@ package com.example.viewer_2020.constants
 class Constants {
     companion object {
         //Game specific data.
-        const val TBA_EVENT_KEY = "2020caln"
+        const val TBA_EVENT_KEY = "2020ilch"
         const val DATABASE_NAME = "scouting_system_cloud"
         const val COLLECTION_NAME = "competitions"
         const val MONGO_ATLAS = "mongodb-atlas"
