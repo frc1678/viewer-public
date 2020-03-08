@@ -8,7 +8,7 @@
 
 package com.example.viewer_2020.fragments.ranking
 
-import android.content.Context
+import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,12 +20,11 @@ import com.example.viewer_2020.getTeamObjectByKey
 
 // Custom list adapter class with aq object handling to display the custom cell for the match schedule.
 class RankingListAdapter(
-    private val context: Context,
-    private val section: String,
+    private val activity: Activity,
     private val listContents: List<String>
 ): BaseAdapter() {
 
-    private val inflater = LayoutInflater.from(context)
+    private val inflater = LayoutInflater.from(activity)
 
     // Return the size of the match schedule.
     override fun getCount(): Int {
@@ -61,22 +60,17 @@ class RankingListAdapter(
 
         viewHolder.tvTeamNumber.text = listContents[position]
 
-        when (section) {
-            "Predicted Seed" -> {
-                viewHolder.tvDatapointOne.text = getTeamObject("predicted_rank",
-                    position, Constants.PROCESSED_OBJECT.CALCULATED_PREDICTED_TEAM.value)
-                viewHolder.tvDatapointTwo.text = getTeamObject("predicted_rps",
-                    position, Constants.PROCESSED_OBJECT.CALCULATED_PREDICTED_TEAM.value)
-            }
-            "Current Seed" -> {
-                viewHolder.tvDatapointOne.text = getTeamObject("current_rank",
-                    position, Constants.PROCESSED_OBJECT.CALCULATED_PREDICTED_TEAM.value)
-                viewHolder.tvDatapointTwo.text = getTeamObject("current_rps",
-                    position, Constants.PROCESSED_OBJECT.CALCULATED_PREDICTED_TEAM.value)
-                viewHolder.tvDatapointThree.text = getTeamObject("current_avg_rps",
-                    position, Constants.PROCESSED_OBJECT.CALCULATED_PREDICTED_TEAM.value)
-            }
-        }
+        viewHolder.tvDatapointOne.text = getTeamObject("current_rank",
+            position, Constants.PROCESSED_OBJECT.CALCULATED_PREDICTED_TEAM.value)
+        viewHolder.tvDatapointTwo.text = getTeamObject("current_avg_rps",
+            position, Constants.PROCESSED_OBJECT.CALCULATED_PREDICTED_TEAM.value)
+        viewHolder.tvDatapointThree.text = getTeamObject("current_rps",
+            position, Constants.PROCESSED_OBJECT.CALCULATED_PREDICTED_TEAM.value)
+        viewHolder.tvDatapointFour.text = getTeamObject("predicted_rps",
+            position, Constants.PROCESSED_OBJECT.CALCULATED_PREDICTED_TEAM.value)
+        viewHolder.tvDatapointFive.text = getTeamObject("predicted_rank",
+            position, Constants.PROCESSED_OBJECT.CALCULATED_PREDICTED_TEAM.value)
+
         return rowView!!
     }
 
@@ -92,4 +86,6 @@ private class ViewHolder(view: View?) {
     val tvDatapointOne = view?.findViewById(R.id.tv_datapoint_one) as TextView
     val tvDatapointTwo = view?.findViewById(R.id.tv_datapoint_two) as TextView
     val tvDatapointThree = view?.findViewById(R.id.tv_datapoint_three) as TextView
+    val tvDatapointFour = view?.findViewById(R.id.tv_datapoint_four) as TextView
+    val tvDatapointFive = view?.findViewById(R.id.tv_datapoint_five) as TextView
 }

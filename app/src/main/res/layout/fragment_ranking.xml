@@ -14,20 +14,32 @@
         android:orientation="horizontal">
 
         <TextView
-            style="@style/tv_standard_black"
-            android:id="@+id/tv_team_number"/>
-
-        <TextView
             style="@style/tv_standard_gray"
             android:id="@+id/tv_datapoint_one"/>
 
         <TextView
-            style="@style/tv_standard_gray"
-            android:id="@+id/tv_datapoint_two"/>
+            style="@style/tv_standard_black"
+            android:id="@+id/tv_team_number"
+            android:layout_weight="2"/>
 
         <TextView
             style="@style/tv_standard_gray"
-            android:id="@+id/tv_datapoint_three"/>
+            android:id="@+id/tv_datapoint_two"
+            android:layout_weight="2"/>
+
+        <TextView
+            style="@style/tv_standard_gray"
+            android:id="@+id/tv_datapoint_three"
+            android:layout_weight="2"/>
+
+        <TextView
+            style="@style/tv_standard_gray"
+            android:id="@+id/tv_datapoint_four"
+            android:layout_weight="2"/>
+
+        <TextView
+            style="@style/tv_standard_gray"
+            android:id="@+id/tv_datapoint_five"/>
 
     </LinearLayout>
 
@@ -36,20 +48,6 @@
         android:id="@+id/view_separator_ll_key"
         android:layout_width="match_parent"
         android:layout_below="@+id/ll_ranking_key"/>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/nav_ranking_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground"
-        android:layout_alignParentBottom="true"
-        app:menu="@menu/bottom_nav_ranking_menu" />
-
-    <View
-        style="@style/view_separator_horizontal"
-        android:id="@+id/view_separator"
-        android:layout_width="match_parent"
-        android:layout_above="@+id/nav_ranking_view"/>
 
     <ListView
         android:id="@+id/lv_ranking"

@@ -21,7 +21,7 @@ data class Team (var team_number: Int?) {
     var first_pick_ability: Float? = null
     var second_pick_ability: Float? = null
     var predicted_rps: Double? = null
-    var predicted_rank: Double? = null
+    var predicted_rank: Int? = null
     var current_rps: Int? = null
     var current_rank: Int? = null
     var current_avg_rps: Float? = null

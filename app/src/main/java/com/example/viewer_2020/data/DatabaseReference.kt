@@ -85,7 +85,7 @@ class DatabaseReference {
     data class CalculatedPredictedTeam (
         var team_number: Int,
         var predicted_rps: Double,
-        var predicted_rank: Double,
+        var predicted_rank: Int,
         var current_rps: Int,
         var current_rank: Int,
         var current_avg_rps: Float

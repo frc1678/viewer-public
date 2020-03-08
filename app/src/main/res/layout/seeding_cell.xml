@@ -5,18 +5,30 @@
     android:layout_height="wrap_content">
 
     <TextView
-        style="@style/tv_standard_black"
-        android:id="@+id/tv_team_number"/>
-
-    <TextView
         style="@style/tv_standard_gray"
         android:id="@+id/tv_datapoint_one"/>
 
     <TextView
-        style="@style/tv_standard_gray"
-        android:id="@+id/tv_datapoint_two"/>
+        style="@style/tv_standard_black"
+        android:id="@+id/tv_team_number"
+        android:layout_weight="2"/>
 
     <TextView
         style="@style/tv_standard_gray"
-        android:id="@+id/tv_datapoint_three"/>
+        android:id="@+id/tv_datapoint_two"
+        android:layout_weight="2"/>
+
+    <TextView
+        style="@style/tv_standard_gray"
+        android:id="@+id/tv_datapoint_three"
+        android:layout_weight="2"/>
+
+    <TextView
+        style="@style/tv_standard_gray"
+        android:id="@+id/tv_datapoint_four"
+        android:layout_weight="2"/>
+
+    <TextView
+        style="@style/tv_standard_gray"
+        android:id="@+id/tv_datapoint_five"/>
 </LinearLayout>

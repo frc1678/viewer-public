@@ -75,20 +75,12 @@ class Constants {
             )
         )
 
-        val FIELDS_TO_BE_DISPLAYED_RANKING_NAVIGATION_BAR: Map<String, String> = mapOf(
-            "Current Seed" to "current_rank",
-            "Predicted Seed" to "predicted_rank"
-        )
-
-        val FIELDS_TO_BE_DISPLAYED_SECTION_ONE_RANKING: List<String> = listOf(
+        val FIELDS_TO_BE_DISPLAYED_RANKING: List<String> = listOf(
             "current_seed",
+            "current_avg_rps",
             "current_rps",
-            "current_avg_rps"
-        )
-
-        val FIELDS_TO_BE_DISPLAYED_SECTION_TWO_RANKING: List<String> = listOf(
-            "predicted_rank",
-            "predicted_rps"
+            "predicted_rps",
+            "predicted_rank"
         )
 
         val FIELDS_TO_BE_DISPLAYED_MATCH_DETAILS_HEADER: List<String> = listOf(
