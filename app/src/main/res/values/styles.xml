@@ -83,6 +83,7 @@
         <item name="android:textColor">@color/Gray</item>
     </style>
 
+
     <style name="tv_standard_white">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>

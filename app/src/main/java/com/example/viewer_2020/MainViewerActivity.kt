@@ -32,6 +32,7 @@ class MainViewerActivity : ViewerActivity() {
         var currentRankingMenuItem: MenuItem? = null
         var databaseReference: DatabaseReference.CompetitionObject? = null
         var teamCache: HashMap<String, Team> = HashMap()
+        var matchCache: HashMap<String, Match> = HashMap()
     }
 
     // Populates the menu items and fragment items with the corresponding fragment IDs.

@@ -59,12 +59,18 @@ fun convertMatchScheduleListToMap(
             }
         }
         false -> {
+            if (MainViewerActivity.matchCache.size == matchScheduleList.size) {
+                return MainViewerActivity.matchCache
+            }
             for (match in matchScheduleList) {
                 val currentMatch = Match(matchNumber.toString())
                 for (index in 1..3) currentMatch.blueTeams.add(removeTeamPrefix(match.trim().split(" ")[index]))
                 for (index in 4..6) currentMatch.redTeams.add(removeTeamPrefix(match.trim().split(" ")[index]))
                 currentMatch.matchNumber = match.trim().split(" ")[0]
                 matchScheduleMap[match.trim().split(" ")[0]] = currentMatch
+                if (match.trim().split(" ")[0] !in MainViewerActivity.matchCache) {
+                    MainViewerActivity.matchCache[match.trim().split(" ")[0]] = currentMatch
+                }
             }
         }
     }

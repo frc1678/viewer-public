@@ -99,6 +99,8 @@ class Constants {
         const val NULL_PREDICTED_SCORE_CHARACTER = "-"
         const val NULL_CHARACTER = "?"
         const val EMPTY_CHARACTER = ""
+        const val RANKING_POINT_CHARACTER = "•"
+        const val PREDICTED_RANKING_POINT_QUALIFICATION = 0.65
     }
 
     enum class PROCESSED_OBJECT(val value: String) {

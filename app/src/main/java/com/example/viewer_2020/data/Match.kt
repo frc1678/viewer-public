@@ -12,4 +12,10 @@ package com.example.viewer_2020.data
 data class Match(var matchNumber: String) {
     var redTeams: ArrayList<String> = ArrayList()
     var blueTeams: ArrayList<String> = ArrayList()
+    var redPredictedScore: Float? = null
+    var bluePredictedScore: Float? = null
+    var redPredictedRPOne: Float? = null
+    var bluePredictedRPOne: Float? = null
+    var redPredictedRPTwo: Float? = null
+    var bluePredictedRPTwo: Float? = null
 }
