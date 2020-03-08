@@ -49,24 +49,6 @@ class MainViewerActivity : ViewerActivity(),
         nav_view.setupWithNavController(findNavController(host))
     }
 
-    // Requests storage permissions if they are not already given.
-    private fun verifyStoragePermissions() {
-        val permission =
-            ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            )
-        if (permission != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-                ),
-                1
-            )
-        }
-    }
-
     fun verifyCSVFileExists(file: String) {
         val csvFile = File( "/storage/emulated/0/${Environment.DIRECTORY_DOWNLOADS}/$file")
         if (!csvFile.exists()) {
@@ -121,7 +103,6 @@ class MainViewerActivity : ViewerActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
-        verifyStoragePermissions()
         verifyCSVFileExists("match_schedule.csv")
         setupNavigationController(R.id.nav_host_fragment)
     }
