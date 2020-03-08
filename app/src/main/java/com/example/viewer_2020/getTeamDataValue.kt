@@ -54,11 +54,6 @@ fun getTeamDataValue(teamNumber: String, field: String): String {
                             "obj_pit", teamNumber, field
                         )] ?: Constants.NULL_CHARACTER
                     }
-                    "climber_strap_installation_time" -> {
-                        return Translations.CLIMBER_STRAP_INSTALLATION_TIME[getRawObjectByKey(
-                            "subj_pit", teamNumber, field
-                        )] ?: Constants.NULL_CHARACTER
-                    }
                     else -> {
                         return getRawObjectByKey(
                             item, teamNumber, field

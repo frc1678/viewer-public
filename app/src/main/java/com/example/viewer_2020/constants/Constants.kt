@@ -27,21 +27,20 @@ class Constants {
             "Auto" to arrayListOf(
                 "auto_avg_balls_low",
                 "auto_avg_balls_high",
-                "auto_high_balls_percent_inner",
                 "auto_line_successes"
             ),
             "Tele" to arrayListOf(
                 "driver_ability",
                 "tele_avg_balls_low",
                 "tele_avg_balls_high",
-                "tele_high_balls_percent_inner",
                 "tele_cp_rotation_successes",
                 "tele_cp_position_successes"
             ),
             "Endgame" to arrayListOf(
+                "climb_all_successes",
                 "climb_all_attempts",
-                "climber_strap_installation_time",
                 "climb_all_success_avg_time",
+                "climber_strap_installation_difficulty",
                 "climb_solo_level_successes"
             )
         )
@@ -50,15 +49,11 @@ class Constants {
             "Auto" to arrayListOf(
                 "auto_avg_balls_low",
                 "auto_avg_balls_high",
-                "auto_high_balls_percent_inner",
                 "auto_line_successes"
             ),
             "Tele" to arrayListOf(
                 "team_name",
                 "driver_ability",
-                "tele_avg_balls_low",
-                "tele_avg_balls_high",
-                "tele_high_balls_percent_inner",
                 "tele_cp_rotation_successes",
                 "tele_cp_position_successes",
                 "can_cross_trench",
@@ -68,12 +63,12 @@ class Constants {
                 "has_ground_intake"
             ),
             "Endgame" to arrayListOf(
-                "climb_all_attempts",
                 "climb_all_successes",
+                "climb_all_attempts",
+                "climb_all_success_avg_time",
+                "climber_strap_installation_difficulty",
                 "climb_solo_level_successes",
                 "park_successes",
-                "auto_line_successes",
-                "climb_all_success_avg_time",
                 "climber_strap_installation_notes"
             )
         )
@@ -112,24 +107,12 @@ class Constants {
         const val EMPTY_CHARACTER = ""
     }
 
-    enum class TYPE_OBJECT {
-        MATCH,
-        TEAM
-    }
-
     enum class PROCESSED_OBJECT(val value: String) {
-        REPLAY_OUTDATED_QR("replay_outdated_qr"),
-        UNCONSOLIDATED_OBJECTIVE_TEAM_IN_MATCH("unconsolidated_obj_tim"),
         CALCULATED_OBJECTIVE_TEAM_IN_MATCH("calc_obj_tim"),
-        SUBJECTIVE_ALLIANCE_IN_MATCH("subj_aim"),
         CALCULATED_OBJECTIVE_TEAM("calc_obj_team"),
         CALCULATED_SUBJECTIVE_TEAM("calc_subj_team"),
-        CALCULATED_MATCH("calc_match"),
         CALCULATED_PREDICTED_ALLIANCE_IN_MATCH("calc_predicted_aim"),
         CALCULATED_PREDICTED_TEAM("calc_predicted_team"),
-        CALCULATED_TBA_TEAM("calc_tba_team"),
-        CALCULATED_PICK_ABILITY_TEAM("calc_pick_ability_team"),
-        CONSOLIDATED_OBJECTIVE_TEAM_IN_MATCH("consolidated_obj_tim"),
-        CALCULATED_TEAM("calc_team")
+        CALCULATED_TBA_TEAM("calc_tba_team")
     }
 }

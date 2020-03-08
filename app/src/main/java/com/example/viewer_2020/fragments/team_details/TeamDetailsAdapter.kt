@@ -7,9 +7,12 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import androidx.fragment.app.FragmentActivity
 import com.example.viewer_2020.R
+import com.example.viewer_2020.constants.Constants
 import com.example.viewer_2020.constants.Translations
 import com.example.viewer_2020.getTeamDataValue
 import kotlinx.android.synthetic.main.team_details_cell.view.*
+import java.lang.Float.parseFloat
+import java.util.regex.Pattern
 
 // Custom list adapter class for each list view of the six teams featured in every MatchDetails display.
 // TODO implement a type 'Team' object parameter to access the team data for the team number.
@@ -40,12 +43,23 @@ class TeamDetailsAdapter(
 
     // Populate the elements of the custom cell.
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+        val regex: Pattern = Pattern.compile("[0-9" + Regex.escape(".") + "]+")
         val rowView = inflater.inflate(R.layout.team_details_cell, parent, false)
         rowView.tv_datapoint_name.text =
             Translations.ACTUAL_TO_HUMAN_READABLE[datapointsDisplayed[currentSection]?.get(position)]
                 ?: datapointsDisplayed[currentSection]?.get(position)
-        rowView.tv_datapoint_value.text = getTeamDataValue(teamNumber,
-            datapointsDisplayed[currentSection]?.get(position)!!)
+        rowView.tv_datapoint_value.text =
+            if (regex.matcher(getTeamDataValue(
+                    teamNumber,
+                    datapointsDisplayed[currentSection]?.get(position)!!)).matches()) {
+                ("%.1f").format(parseFloat(getTeamDataValue(teamNumber,
+                    datapointsDisplayed[currentSection]?.get(position)!!))
+                )
+            } else {
+                getTeamDataValue(teamNumber,
+                    datapointsDisplayed[currentSection]?.get(position)!!
+                )
+            }
         return rowView
     }
 }

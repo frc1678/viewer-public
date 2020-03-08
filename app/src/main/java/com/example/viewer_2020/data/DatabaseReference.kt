@@ -43,17 +43,15 @@ class DatabaseReference {
     data class SubjectivePit (
         var team_number: Int,
         var climber_strap_installation_notes: String,
-        var climber_strap_installation_time: Int //todo IF APP CRASHES,
+        var climber_strap_installation_difficulty: Int //todo IF APP CRASHES,
         //todo THIS VALUE IS ACTUALLY AN ENUM BUT I HAVE NO IDEA WHY THEY THOUGHT IT
         //todo WAS A GOOD IDEA TO HAVE IT AS AN ENUM WHEN WE OBVIOUSLY CANNOT HANDLE ENUMS
     )
+
     data class Processed (
-        var replay_outdated_qr: Array<String>,
-        var unconsolidated_obj_tim: Array<UnconsolidatedObjectiveTeamInMatch>,
         var calc_obj_tim: Array<CalculatedObjectiveTeamInMatch>,
         var calc_obj_team: Array<CalculatedObjectiveTeam>,
         var calc_subj_team: Array<CalculatedSubjectiveTeam>,
-        var calc_match: Array<String>,
         var calc_predicted_aim: Array<CalculatedPredictedAllianceInMatch>,
         var calc_predicted_team: Array<CalculatedPredictedTeam>,
         var calc_tba_team: Array<CalculatedTBATeam>,
@@ -70,26 +68,12 @@ class DatabaseReference {
 
     data class CalculatedTBATeam (
         var team_number: Int,
-        var auto_high_balls_percent_inner: Float,
-        var tele_high_balls_percent_inner: Float,
-        var climb_all_success_avg_time: Float,
         var team_name: String,
+        var climb_all_success_avg_time: Float,
         var climb_all_successes: Int,
         var climb_solo_level_successes: Int,
         var park_successes: Int,
         var auto_line_successes: Int
-    )
-
-    data class CalculatedObjectiveTeamInMatch (
-        var team_number: Int,
-        var match_number: Int,
-        var auto_balls_low: Int,
-        var auto_balls_high: Int,
-        var tele_balls_low: Int,
-        var tele_balls_high: Int,
-        var control_panel_rotation: Boolean,
-        var control_panel_position: Boolean,
-        var timeline_cycle_time: Int
     )
 
     data class CalculatedPickAbilityTeam (
@@ -99,12 +83,12 @@ class DatabaseReference {
     )
 
     data class CalculatedPredictedTeam (
+        var team_number: Int,
         var predicted_rps: Double,
         var predicted_rank: Double,
         var current_rps: Int,
         var current_rank: Int,
-        var current_avg_rps: Float,
-        var team_number: Int
+        var current_avg_rps: Float
     )
 
     data class CalculatedSubjectiveTeam (
@@ -118,27 +102,22 @@ class DatabaseReference {
         var team_number: Int,
         var auto_avg_balls_low: Float,
         var auto_avg_balls_high: Float,
-        var auto_avg_balls_total: Float,
         var tele_avg_balls_low: Float,
         var tele_avg_balls_high: Float,
-        var tele_avg_balls_total: Float,
         var tele_cp_rotation_successes: Int,
         var tele_cp_position_successes: Int,
         var climb_all_attempts: Int
     )
 
-    data class UnconsolidatedObjectiveTeamInMatch (
-        var schema_version: Int,
-        var serial_number: String,
-        var scout_name: String,
-        var match_number: Int,
-        var timestamp: Int,
+    data class CalculatedObjectiveTeamInMatch (
         var team_number: Int,
-        var timeline: Array<Timeline>
-    )
-
-    data class Timeline (
-        var time: Int,
-        var action_type: String
+        var match_number: Int,
+        var auto_balls_low: Int,
+        var auto_balls_high: Int,
+        var tele_balls_low: Int,
+        var tele_balls_high: Int,
+        var control_panel_rotation: Boolean,
+        var control_panel_position: Boolean,
+        var timeline_cycle_time: Int
     )
 }

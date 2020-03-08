@@ -38,5 +38,5 @@ data class Team (var team_number: Int?) {
     var tele_cp_position_successes: Int? = null
     var climb_all_attempts: Int? = null
     var climber_strap_installation_notes: String? = null
-    var climber_strap_installation_time: Int? = null
+    var climber_strap_installation_difficulty: Int? = null
 }
