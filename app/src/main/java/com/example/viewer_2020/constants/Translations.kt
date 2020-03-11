@@ -16,7 +16,7 @@ class Translations {
             "tele_cp_rotation_successes" to "# Rotations",
             "tele_cp_position_successes" to "# Positions",
             "climb_all_successes" to "# Climbs",
-            "climb_solo_level_successes" to "Solo Level Climbs",
+            "climb_level_successes" to "Level Climbs",
             "park_successes" to "Parks",
             "auto_line_successes" to "# Auto Lines",
             "climb_all_success_avg_time" to "Climb Time",

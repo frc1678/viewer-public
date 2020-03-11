@@ -71,7 +71,7 @@ class DatabaseReference {
         var team_name: String,
         var climb_all_success_avg_time: Float,
         var climb_all_successes: Int,
-        var climb_solo_level_successes: Int,
+        var climb_level_successes: Int,
         var park_successes: Int,
         var auto_line_successes: Int
     )

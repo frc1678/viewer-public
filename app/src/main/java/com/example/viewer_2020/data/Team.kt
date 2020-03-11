@@ -15,7 +15,7 @@ data class Team (var team_number: Int?) {
     var climb_all_success_avg_time: Float? = null
     var team_name: String? = null
     var climb_all_successes: Int? = null
-    var climb_solo_level_successes: Int? = null
+    var climb_level_successes: Int? = null
     var park_successes: Int? = null
     var auto_line_successes: Int? = null
     var first_pick_ability: Float? = null
